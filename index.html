@@ -1,331 +1,117 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>гойда</title>
-  <style>
-    body {
-      display: flex;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Влог сайт</title>
+<style>
+  /* Сброс стилей */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body, html {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    background: #111;
+  }
+
+  /* Полноэкранный фон */
+  .hero {
+    position: relative;
+    height: 100vh;
+    background: url('your-image.jpg') center center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-text {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  }
+
+  /* Контейнер с фактами */
+  .facts-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px;
+    background: #222;
+    flex-wrap: wrap;
+  }
+
+  .fact-box {
+    background: #333;
+    border-radius: 15px;
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  .square {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    background: #4caf50;
+    border-radius: 15px;
+  }
+
+  .fact-text {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: #ddd;
+  }
+
+  /* Мобильная адаптация */
+  @media (max-width: 700px) {
+    .facts-container {
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Comic Sans MS, sans-serif;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      background-image: url('https://raw.githubusercontent.com/IamDimoon/siteros/main/bgpar2.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
     }
 
-    .social-buttons {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 100;
+    .fact-box {
+      width: 90%;
     }
-
-    .social-button {
-      width: 50px;
-      height: 50px;
-      background-color: white;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-    }
-
-    .social-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-    }
-
-    .social-button img {
-      max-width: 80%;
-      max-height: 80%;
-    }
-
-    .social-button .tooltip {
-      position: absolute;
-      left: 60px;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 14px;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-
-    .social-button:hover .tooltip {
-      opacity: 1;
-    }
-
-    .content {
-      position: relative;
-      z-index: 1;
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-
-    .button {
-      padding: 12px 24px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background-color 0.3s;
-      position: relative;
-      z-index: 1;
-    }
-
-    .button:hover {
-      background-color: #45a049;
-    }
-
-    .counter {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      display: none;
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 10px;
-      border-radius: 5px;
-    }
-
-    .one {
-      position: absolute;
-      color: #4CAF50;
-      font-size: 24px;
-      font-weight: bold;
-      user-select: none;
-      pointer-events: none;
-      animation: fly 1.5s linear forwards;
-      z-index: 2;
-    }
-
-    #secret-image {
-      display: none;
-      max-width: 300px;
-      margin-top: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    }
-
-    #gif-container {
-      display: none;
-      max-width: 500px;
-      margin-top: 20px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    }
-
-    #gif-container img {
-      width: 100%;
-      height: auto;
-    }
-
-    #gift-key-container {
-      display: none;
-      margin-top: 20px;
-    }
-
-    #gift-key-title {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    #gift-key-code {
-      font-family: monospace;
-      font-size: 18px;
-      letter-spacing: 1px;
-      background-color: rgba(0, 0, 0, 0.1);
-      padding: 8px 12px;
-      border-radius: 5px;
-    }
-
-    .footer-text {
-      position: fixed;
-      bottom: 20px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      color: white;
-      font-size: 14px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-      z-index: 1;
-    }
-
-    @keyframes fly {
-      0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-      }
-
-      100% {
-        transform: translate(var(--tx), var(--ty)) scale(0.5);
-        opacity: 0;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
-
 <body>
-  <!-- Социальные кнопки -->
-  <div class="social-buttons">
-    <a href="https://github.com/IamDimoon/siteros" target="_blank" class="social-button">
-      <img src="https://raw.githubusercontent.com/IamDimoon/siteros/main/github.png" alt="GitHub">
-      <span class="tooltip">Ассеты и спрайты сайта</span>
-    </a>
-    <a href="https://t.me/IamDimonOfficial" target="_blank" class="social-button">
-      <img src="https://raw.githubusercontent.com/IamDimoon/siteros/main/tg.png" alt="Telegram">
-      <span class="tooltip">Мой ТГК</span>
-    </a>
-    <a href="https://www.youtube.com/@IamDimon1" target="_blank" class="social-button">
-      <img src="https://raw.githubusercontent.com/IamDimoon/siteros/main/yt.png" alt="YouTube">
-      <span class="tooltip">Мой ЮТ</span>
-    </a>
-    <a href="http://colorcube.42web.io/" target="_blank" class="social-button">
-      <img src="https://raw.githubusercontent.com/IamDimoon/siteros/main/y4ebnik.png" alt="Учебник">
-      <span class="tooltip">Сайт Учебника</span>
-    </a>
-  </div>
 
-  <div class="content">
-    <div>Заставь меня сиять дядя! </div>
-    <button class="button" id="clickButton">Сияй!</button>
+  <section class="hero">
+    <div class="hero-text">Добро пожаловать на мой сайт</div>
+  </section>
 
-    <!-- Секретное изображение -->
-    <img id="secret-image" src="https://raw.githubusercontent.com/IamDimoon/SUPEROVERHEAVENGAYME228/main/da1.png"
-      alt="Секретное изображение">
-
-    <!-- Контейнер для Gift Key -->
-    <div id="gift-key-container">
-      <div id="gift-key-title">Gift Key</div>
-      <div id="gift-key-code"></div>
+  <section class="facts-container">
+    <div class="fact-box">
+      <div class="square" style="background:#ff5722;"></div>
+      <div class="fact-text">
+        Мед — единственный продукт, который не портится со временем.
+      </div>
     </div>
-  </div>
 
-  <!-- Контейнер для гифки (появляется после 50 кликов) -->
-  <div id="gif-container">
-    <img src="https://raw.githubusercontent.com/IamDimoon/siteros/main/stul.gif" alt="Специальная гифка">
-  </div>
+    <div class="fact-box">
+      <div class="square" style="background:#2196f3;"></div>
+      <div class="fact-text">
+        Осьминоги имеют три сердца и голубую кровь.
+      </div>
+    </div>
 
-  <div class="counter" id="counter">Сделано сияний: <span id="clickCount">0</span></div>
-  
-  <!-- Новая надпись внизу -->
-  <div class="footer-text">да кликер и че. потом допилю ( я спать )</div>
+    <div class="fact-box">
+      <div class="square" style="background:#9c27b0;"></div>
+      <div class="fact-text">
+        Вулканические острова появляются из-под воды и формируют новую землю.
+      </div>
+    </div>
+  </section>
 
-  <script>
-    const button = document.getElementById('clickButton');
-    const counter = document.getElementById('counter');
-    const clickCountElement = document.getElementById('clickCount');
-    const secretImage = document.getElementById('secret-image');
-    const gifContainer = document.getElementById('gif-container');
-    const giftKeyContainer = document.getElementById('gift-key-container');
-    const giftKeyCode = document.getElementById('gift-key-code');
-
-    let clickCount = 0;
-
-    button.addEventListener('click', function (e) {
-      clickCount++;
-      clickCountElement.textContent = clickCount;
-
-      // Показываем счётчик после первого нажатия
-      if (clickCount === 1) {
-        counter.style.display = 'block';
-      }
-
-      // Показываем изображение после 10 нажатий
-      if (clickCount === 10) {
-        secretImage.style.display = 'block';
-        secretImage.style.animation = 'fadeIn 1s ease-in';
-      }
-
-      // Показываем гифку после 50 нажатий
-      if (clickCount === 50) {
-        gifContainer.style.display = 'block';
-      }
-
-      // Показываем Gift Key на 77 клике
-      if (clickCount === 77) {
-        secretImage.style.display = 'none';
-        giftKeyContainer.style.display = 'block';
-        giftKeyCode.textContent = generateRandomKey();
-      }
-
-      // Возвращаем картинку на 78 клике
-      if (clickCount === 78) {
-        giftKeyContainer.style.display = 'none';
-        secretImage.style.display = 'block';
-      }
-
-      // Создаем 5 единичек при каждом клике
-      for (let i = 0; i < 5; i++) {
-        createOne(e.clientX, e.clientY);
-      }
-    });
-
-    function createOne(x, y) {
-      const one = document.createElement('div');
-      one.className = 'one';
-      one.textContent = '1';
-
-      // Случайное направление вылета
-      const angle = Math.random() * Math.PI * 2;
-      const distance = 100 + Math.random() * 100;
-      const tx = Math.cos(angle) * distance;
-      const ty = Math.sin(angle) * distance;
-
-      one.style.setProperty('--tx', `${tx}px`);
-      one.style.setProperty('--ty', `${ty}px`);
-      one.style.left = `${x}px`;
-      one.style.top = `${y}px`;
-
-      document.body.appendChild(one);
-
-      // Удаляем элемент после завершения анимации
-      setTimeout(() => {
-        one.remove();
-      }, 1500);
-    }
-
-    function generateRandomKey() {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      const segments = [5, 5, 5, 5, 5]; // 5 сегментов по 5 символов
-      let key = '';
-
-      segments.forEach((length, index) => {
-        for (let i = 0; i < length; i++) {
-          key += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        if (index < segments.length - 1) {
-          key += '-';
-        }
-      });
-
-      return key;
-    }
-  </script>
 </body>
-
 </html>
