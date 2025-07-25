@@ -57,10 +57,14 @@
     border-radius: 20px;
     padding: 40px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
   }
 
-  .fact-box.reverse {
-    flex-direction: row-reverse;
+  .fact-box.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .square {
@@ -68,30 +72,30 @@
     height: 120px;
     border-radius: 20px;
     flex-shrink: 0;
+    margin-right: 30px;
   }
 
   .fact-text {
     font-size: 1.4rem;
     line-height: 1.6;
     color: #ddd;
-    margin: 0 30px;
     flex: 1;
     text-align: left;
   }
 
   @media (max-width: 700px) {
-    .fact-box, .fact-box.reverse {
-      flex-direction: column !important;
+    .fact-box {
+      flex-direction: column;
       text-align: center;
     }
 
-    .fact-text {
-      margin: 20px 0;
+    .square {
+      margin-right: 0;
+      margin-bottom: 20px;
     }
 
-    .square {
-      width: 100px;
-      height: 100px;
+    .fact-text {
+      margin: 0;
     }
   }
 </style>
@@ -110,7 +114,7 @@
     </div>
   </div>
 
-  <div class="fact-box reverse">
+  <div class="fact-box">
     <div class="square" style="background:#2196f3;"></div>
     <div class="fact-text">
       Осьминоги имеют три сердца и голубую кровь.
@@ -126,13 +130,28 @@
 </section>
 
 <script>
+  // Автопрокрутка при первом скролле
   let triggered = false;
-
   window.addEventListener('scroll', () => {
     if (!triggered && window.scrollY > 10) {
       triggered = true;
       document.getElementById('facts').scrollIntoView({ behavior: 'smooth' });
     }
+  });
+
+  // Анимация появления фактов
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  document.querySelectorAll('.fact-box').forEach(box => {
+    observer.observe(box);
   });
 </script>
 
