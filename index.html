@@ -5,11 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Влог сайт</title>
 <style>
-  /* Сброс стилей */
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body, html {
@@ -19,7 +22,6 @@
     background: #111;
   }
 
-  /* Полноэкранный фон */
   .hero {
     position: relative;
     height: 100vh;
@@ -33,85 +35,106 @@
     font-size: 3rem;
     font-weight: bold;
     text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+    text-align: center;
+    padding: 0 20px;
   }
 
-  /* Контейнер с фактами */
   .facts-container {
     display: flex;
-    justify-content: center;
-    gap: 40px;
-    padding: 40px;
+    flex-direction: column;
+    gap: 60px;
+    padding: 80px 20px;
     background: #222;
-    flex-wrap: wrap;
+    align-items: center;
   }
 
   .fact-box {
-    background: #333;
-    border-radius: 15px;
-    width: 300px;
-    padding: 20px;
     display: flex;
-    gap: 20px;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 900px;
+    background: #333;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+
+  .fact-box.reverse {
+    flex-direction: row-reverse;
   }
 
   .square {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
     flex-shrink: 0;
-    width: 80px;
-    height: 80px;
-    background: #4caf50;
-    border-radius: 15px;
   }
 
   .fact-text {
-    flex: 1;
-    font-size: 1.1rem;
-    line-height: 1.4;
+    font-size: 1.4rem;
+    line-height: 1.6;
     color: #ddd;
+    margin: 0 30px;
+    flex: 1;
+    text-align: left;
   }
 
-  /* Мобильная адаптация */
   @media (max-width: 700px) {
-    .facts-container {
-      flex-direction: column;
-      align-items: center;
+    .fact-box, .fact-box.reverse {
+      flex-direction: column !important;
+      text-align: center;
     }
 
-    .fact-box {
-      width: 90%;
+    .fact-text {
+      margin: 20px 0;
+    }
+
+    .square {
+      width: 100px;
+      height: 100px;
     }
   }
 </style>
 </head>
 <body>
 
-  <section class="hero">
-    <div class="hero-text">Добро пожаловать на мой сайт</div>
-  </section>
+<section class="hero">
+  <div class="hero-text">Добро пожаловать на мой сайт</div>
+</section>
 
-  <section class="facts-container">
-    <div class="fact-box">
-      <div class="square" style="background:#ff5722;"></div>
-      <div class="fact-text">
-        Мед — единственный продукт, который не портится со временем.
-      </div>
+<section class="facts-container" id="facts">
+  <div class="fact-box">
+    <div class="square" style="background:#ff5722;"></div>
+    <div class="fact-text">
+      Мед — единственный продукт, который не портится со временем.
     </div>
+  </div>
 
-    <div class="fact-box">
-      <div class="square" style="background:#2196f3;"></div>
-      <div class="fact-text">
-        Осьминоги имеют три сердца и голубую кровь.
-      </div>
+  <div class="fact-box reverse">
+    <div class="square" style="background:#2196f3;"></div>
+    <div class="fact-text">
+      Осьминоги имеют три сердца и голубую кровь.
     </div>
+  </div>
 
-    <div class="fact-box">
-      <div class="square" style="background:#9c27b0;"></div>
-      <div class="fact-text">
-        Вулканические острова появляются из-под воды и формируют новую землю.
-      </div>
+  <div class="fact-box">
+    <div class="square" style="background:#9c27b0;"></div>
+    <div class="fact-text">
+      Вулканические острова появляются из-под воды и формируют новую землю.
     </div>
-  </section>
+  </div>
+</section>
+
+<script>
+  let triggered = false;
+
+  window.addEventListener('scroll', () => {
+    if (!triggered && window.scrollY > 10) {
+      triggered = true;
+      document.getElementById('facts').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
 
 </body>
 </html>
