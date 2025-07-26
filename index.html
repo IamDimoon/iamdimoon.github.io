@@ -157,6 +157,13 @@
       height: 70%;
       object-fit: contain;
     }
+    @media (max-width: 700px) and (orientation: portrait) {
+  .background-image {
+    transform: translateX(calc(-50% + 20px)) scale(10);
+    transform-origin: top center;
+    min-width: unset; /* отключаем переопределение ширины */
+  }
+}
   </style>
 </head>
 <body>
