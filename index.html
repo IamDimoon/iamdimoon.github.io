@@ -20,28 +20,16 @@
       font-family: 'Arial', sans-serif;
       color: white;
       background-color: #111;
-      position: relative;
-    }
-
-    /* Новый фон */
-    .background-wrapper {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .scrolling-background {
-      display: block;
-      width: 100%;
-      height: auto;
     }
 
     .hero {
       position: relative;
-      height: 100vh;
+      background: url('https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/maomaofull.png') center top / contain no-repeat;
+      background-attachment: scroll;
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      padding-left: 10%;
+      padding: 100px 10% 200px;
     }
 
     .hero-content {
@@ -68,6 +56,8 @@
       padding: 80px 20px;
       background: #2220;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
     .fact-box {
@@ -156,11 +146,6 @@
 </head>
 <body>
 
-<!-- 🔥 Прокручиваемый фон -->
-<div class="background-wrapper">
-  <img class="scrolling-background" src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/maomaofull.png" alt="фон">
-</div>
-
 <section class="hero">
   <div class="hero-content">
     <div class="hero-title">IamDimon</div>
@@ -191,13 +176,11 @@
   </div>
 </section>
 
-<!-- Кнопка -->
 <a href="/clicker/" class="floating-button" target="_blank">
   <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cleker.png" alt="Кнопка">
 </a>
 
 <script>
-  // Прокрутка при первом скролле
   let triggered = false;
   window.addEventListener('scroll', () => {
     if (!triggered && window.scrollY > 10) {
@@ -206,7 +189,6 @@
     }
   });
 
-  // Анимация появления
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
