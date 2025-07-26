@@ -20,20 +20,34 @@
       font-family: 'Arial', sans-serif;
       color: white;
       background-color: #111;
+      position: relative;
     }
 
+    /* Фоновая картинка — как элемент, растягиваем */
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+      min-width: 100%;
+      height: auto;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Контентный блок */
     .hero {
       position: relative;
-      background: url('https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/maomaofull.png') center top / contain no-repeat;
-      background-attachment: scroll;
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      padding: 100px 10% 200px;
+      padding: 150px 10% 300px;
+      z-index: 1;
     }
 
     .hero-content {
-      transform: translateY(-15%);
+      max-width: 1000px;
     }
 
     .hero-title {
@@ -146,6 +160,10 @@
 </head>
 <body>
 
+<!-- Картинка в фоне -->
+<img class="background-image" src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/maomaofull.png" alt="фон">
+
+<!-- Основной блок -->
 <section class="hero">
   <div class="hero-content">
     <div class="hero-title">IamDimon</div>
@@ -153,29 +171,23 @@
   </div>
 </section>
 
+<!-- Факты -->
 <section class="facts-container" id="facts">
   <div class="fact-box">
     <img class="fact-img" src="URL_КАРТИНКИ_1" alt="Факт 1">
-    <div class="fact-text">
-      босс я устал ( картинки завтра завезу).
-    </div>
+    <div class="fact-text">босс я устал ( картинки завтра завезу).</div>
   </div>
-
   <div class="fact-box">
     <img class="fact-img" src="URL_КАРТИНКИ_2" alt="Факт 2">
-    <div class="fact-text">
-      арбузнй лор(д)
-    </div>
+    <div class="fact-text">арбузнй лор(д)</div>
   </div>
-
   <div class="fact-box">
     <img class="fact-img" src="URL_КАРТИНКИ_3" alt="Факт 3">
-    <div class="fact-text">
-      савек превет.
-    </div>
+    <div class="fact-text">савек превет.</div>
   </div>
 </section>
 
+<!-- Кнопка -->
 <a href="/clicker/" class="floating-button" target="_blank">
   <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cleker.png" alt="Кнопка">
 </a>
@@ -195,9 +207,7 @@
         entry.target.classList.add('visible');
       }
     });
-  }, {
-    threshold: 0.2
-  });
+  }, { threshold: 0.2 });
 
   document.querySelectorAll('.fact-box').forEach(box => {
     observer.observe(box);
