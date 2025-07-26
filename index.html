@@ -17,23 +17,33 @@
     }
 
     body {
-  font-family: 'Arial', sans-serif;
-  color: white;
-  background: url('https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/maomaofull.png') center top/contain no-repeat;
-  background-attachment: fixed;
-  background-color: #111;
-}
+      font-family: 'Arial', sans-serif;
+      color: white;
+      background-color: #111;
+      position: relative;
+      z-index: 0;
+    }
 
+    .full-background {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+      height: 100%;
+      min-height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
 
     .hero {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-left: 10%;
-}
-
+      position: relative;
+      height: 100vh;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-left: 10%;
+    }
 
     .hero-content {
       transform: translateY(-15%);
@@ -59,6 +69,8 @@
       padding: 80px 20px;
       background: #2220;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
     .fact-box {
@@ -97,7 +109,6 @@
       padding: 0 30px;
     }
 
-    /* Чередование: зеркалим второй блок */
     .fact-box:nth-child(even) {
       flex-direction: row-reverse;
     }
@@ -118,7 +129,6 @@
       }
     }
 
-    /* Кнопка в правом нижнем углу */
     .floating-button {
       position: fixed;
       bottom: 20px;
@@ -148,6 +158,9 @@
   </style>
 </head>
 <body>
+
+<!-- КАРТИНКА НА ФОН -->
+<img class="full-background" src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/maomaofull.png" alt="фон">
 
 <section class="hero">
   <div class="hero-content">
@@ -179,13 +192,11 @@
   </div>
 </section>
 
-<!-- Кнопка в правом нижнем углу -->
 <a href="/clicker/" class="floating-button" target="_blank">
   <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cleker.png" alt="Кнопка">
 </a>
 
 <script>
-  // Автопрокрутка при первом скролле
   let triggered = false;
   window.addEventListener('scroll', () => {
     if (!triggered && window.scrollY > 10) {
@@ -194,7 +205,6 @@
     }
   });
 
-  // Анимация появления фактов
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
