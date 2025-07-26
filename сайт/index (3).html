@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IamDimon</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body, html {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    background: #111;
+  }
+
+  .hero {
+  position: relative;
+  height: 100vh;
+  background: url('https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/maomaoi.png') center center/cover no-repeat;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 10%;
+}
+
+.hero-content {
+  transform: translateY(-15%);
+}
+
+.hero-title {
+  font-size: 5rem;
+  font-weight: bold;
+  text-shadow: 3px 3px 10px rgba(0,0,0,0.7);
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  color: #ccc;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+
+
+  .facts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding: 80px 20px;
+    background: #222;
+    align-items: center;
+  }
+
+  .fact-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    background: #333;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+  }
+
+  .fact-box.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .square {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    margin-right: 30px;
+  }
+
+  .fact-text {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #ddd;
+    flex: 1;
+    text-align: left;
+  }
+
+  @media (max-width: 700px) {
+    .fact-box {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .square {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+
+    .fact-text {
+      margin: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-title">IamDimon</div>
+    <div class="hero-subtitle">Ютубер, стример и ещё много чево</div>
+  </div>
+</section>
+
+
+<section class="facts-container" id="facts">
+  <div class="fact-box">
+    <div class="square" style="background:#ff5722;"></div>
+    <div class="fact-text">
+      Мед — единственный продукт, который не портится со временем.
+    </div>
+  </div>
+
+  <div class="fact-box">
+    <div class="square" style="background:#2196f3;"></div>
+    <div class="fact-text">
+      Осьминоги имеют три сердца и голубую кровь.
+    </div>
+  </div>
+
+  <div class="fact-box">
+    <div class="square" style="background:#9c27b0;"></div>
+    <div class="fact-text">
+      Вулканические острова появляются из-под воды и формируют новую землю.
+    </div>
+  </div>
+</section>
+
+<script>
+  // Автопрокрутка при первом скролле
+  let triggered = false;
+  window.addEventListener('scroll', () => {
+    if (!triggered && window.scrollY > 10) {
+      triggered = true;
+      document.getElementById('facts').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  // Анимация появления фактов
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  document.querySelectorAll('.fact-box').forEach(box => {
+    observer.observe(box);
+  });
+</script>
+
+</body>
+</html>

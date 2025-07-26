@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Влог сайт</title>
+<style>
+  /* Сброс стилей */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body, html {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    background: #111;
+  }
+
+  /* Полноэкранный фон */
+  .hero {
+    position: relative;
+    height: 100vh;
+    background: url('your-image.jpg') center center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-text {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  }
+
+  /* Контейнер с фактами */
+  .facts-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px;
+    background: #222;
+    flex-wrap: wrap;
+  }
+
+  .fact-box {
+    background: #333;
+    border-radius: 15px;
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  .square {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    background: #4caf50;
+    border-radius: 15px;
+  }
+
+  .fact-text {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: #ddd;
+  }
+
+  /* Мобильная адаптация */
+  @media (max-width: 700px) {
+    .facts-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fact-box {
+      width: 90%;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-text">Добро пожаловать на мой сайт</div>
+  </section>
+
+  <section class="facts-container">
+    <div class="fact-box">
+      <div class="square" style="background:#ff5722;"></div>
+      <div class="fact-text">
+        Мед — единственный продукт, который не портится со временем.
+      </div>
+    </div>
+
+    <div class="fact-box">
+      <div class="square" style="background:#2196f3;"></div>
+      <div class="fact-text">
+        Осьминоги имеют три сердца и голубую кровь.
+      </div>
+    </div>
+
+    <div class="fact-box">
+      <div class="square" style="background:#9c27b0;"></div>
+      <div class="fact-text">
+        Вулканические острова появляются из-под воды и формируют новую землю.
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
