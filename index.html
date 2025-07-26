@@ -114,6 +114,34 @@
         height: auto;
       }
     }
+
+    /* Кнопка в правом нижнем углу */
+    .floating-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #444;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .floating-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
+    }
+
+    .floating-button img {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+    }
   </style>
 </head>
 <body>
@@ -147,6 +175,11 @@
     </div>
   </div>
 </section>
+
+<!-- Кнопка в правом нижнем углу -->
+<a href="goyda.html" class="floating-button" target="_blank">
+  <img src="ССЫЛКА_НА_КАРТИНКУ_КНОПКИ" alt="Кнопка">
+</a>
 
 <script>
   // Автопрокрутка при первом скролле
