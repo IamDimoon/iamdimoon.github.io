@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -24,7 +23,6 @@
       position: relative;
     }
 
-    /* Фоновая картинка — как элемент, растягиваем */
     .background-image {
       position: absolute;
       top: -6%;
@@ -37,7 +35,6 @@
       pointer-events: none;
     }
 
-    /* Контентный блок */
     .hero {
       position: relative;
       display: flex;
@@ -62,6 +59,34 @@
       margin-top: 10px;
       color: #ccc;
       text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+    }
+
+    /* Новый декоративный блок */
+    .transition-block {
+      width: 90%;
+      max-width: 1400px;
+      margin: 0 auto;
+      height: 300px;
+      border-radius: 40px;
+      background: url('https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/texture.png') center/cover no-repeat;
+      background-color: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+    }
+
+    .transition-text {
+      color: #fff;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
     }
 
     .facts-container {
@@ -129,6 +154,16 @@
         width: 100%;
         height: auto;
       }
+
+      .transition-block {
+        height: 200px;
+        border-radius: 20px;
+      }
+
+      .transition-text {
+        font-size: 1.5rem;
+        padding: 10px;
+      }
     }
 
     .floating-button {
@@ -157,13 +192,14 @@
       height: 70%;
       object-fit: contain;
     }
+
     @media (max-width: 700px) and (orientation: portrait) {
-  .background-image {
-    transform: translateX(calc(-50% + 20px)) scale(10);
-    transform-origin: top center;
-    min-width: unset; /* отключаем переопределение ширины */
-  }
-}
+      .background-image {
+        transform: translateX(calc(-50% + 20px)) scale(10);
+        transform-origin: top center;
+        min-width: unset;
+      }
+    }
   </style>
 </head>
 <body>
@@ -178,6 +214,11 @@
     <div class="hero-subtitle">Ютубер, стример и ещё много чево</div>
   </div>
 </section>
+
+<!-- Новый декоративный блок -->
+<div class="transition-block">
+  <div class="transition-text">ты думал тут что то будет</div>
+</div>
 
 <!-- Факты -->
 <section class="facts-container" id="facts">
