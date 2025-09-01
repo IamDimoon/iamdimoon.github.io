@@ -120,12 +120,12 @@
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
-  // Инициализация частиц
-  document.addEventListener('DOMContentLoaded', function() {
+  // Инициализация частиц после полной загрузки страницы
+  window.onload = function() {
     particlesJS('particles-js', {
       "particles": {
         "number": {
-          "value": 100,
+          "value": 80,
           "density": {
             "enable": true,
             "value_area": 800
@@ -143,9 +143,9 @@
         },
         "opacity": {
           "value": 0.5,
-          "random": true,
+          "random": false,
           "anim": {
-            "enable": true,
+            "enable": false,
             "speed": 1,
             "opacity_min": 0.1,
             "sync": false
@@ -155,8 +155,8 @@
           "value": 3,
           "random": true,
           "anim": {
-            "enable": true,
-            "speed": 3,
+            "enable": false,
+            "speed": 40,
             "size_min": 0.1,
             "sync": false
           }
@@ -172,7 +172,7 @@
           "enable": true,
           "speed": 3,
           "direction": "none",
-          "random": true,
+          "random": false,
           "straight": false,
           "out_mode": "out",
           "bounce": false,
@@ -184,7 +184,7 @@
         }
       },
       "interactivity": {
-        "detect_on": "canvas",
+        "detect_on": "window", // Изменили на "window" вместо "canvas"
         "events": {
           "onhover": {
             "enable": true,
@@ -211,7 +211,7 @@
             "speed": 3
           },
           "repulse": {
-            "distance": 100,
+            "distance": 100, // Увеличили расстояние отталкивания
             "duration": 0.4
           },
           "push": {
@@ -224,7 +224,9 @@
       },
       "retina_detect": true
     });
-  });
+    
+    console.log('Particles.js initialized successfully');
+  };
 </script>
 
 </body>
