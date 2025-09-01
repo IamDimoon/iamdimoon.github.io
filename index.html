@@ -12,8 +12,9 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html, body {
+      overflow: hidden; /* Блокируем прокрутку */
+      height: 100%;
     }
 
     body {
@@ -42,6 +43,7 @@
       align-items: center;
       padding: 300px 10% 300px;
       z-index: 1;
+      height: 100vh; /* Занимает всю высоту экрана */
     }
 
     .hero-content {
@@ -59,112 +61,6 @@
       margin-top: 10px;
       color: #ccc;
       text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
-    }
-
-    /* Новый декоративный блок */
-    .transition-block {
-      width: 90%;
-      max-width: 1400px;
-      margin: 0 auto;
-      margin-top: 400px;
-      height: 800px;
-      border-radius: 40px;
-      background: url('https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/texture.png') center/cover no-repeat;
-      background-color: rgba(255, 255, 255, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-      overflow: hidden;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
-    }
-
-    .transition-text {
-      color: #fff;
-      font-size: 2rem;
-      font-weight: bold;
-      text-align: center;
-      padding: 20px;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-    }
-
-    .facts-container {
-      display: flex;
-      flex-direction: column;
-      gap: 60px;
-      padding: 300px 20px;
-      background: #2220;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .fact-box {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      max-width: 1000px;
-      background: #333;
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
-    }
-
-    .fact-box.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .fact-img {
-      width: 200px;
-      height: 200px;
-      border-radius: 20px;
-      flex-shrink: 0;
-      object-fit: cover;
-    }
-
-    .fact-text {
-      font-size: 1.4rem;
-      line-height: 1.6;
-      color: #ddd;
-      flex: 1;
-      text-align: left;
-      padding: 0 30px;
-    }
-
-    .fact-box:nth-child(even) {
-      flex-direction: row-reverse;
-    }
-
-    @media (max-width: 700px) {
-      .fact-box {
-        flex-direction: column !important;
-        text-align: center;
-      }
-
-      .fact-text {
-        padding: 20px 0 0;
-      }
-
-      .fact-img {
-        width: 100%;
-        height: auto;
-      }
-
-      .transition-block {
-        height: 200px;
-        border-radius: 20px;
-      }
-
-      .transition-text {
-        font-size: 1.5rem;
-        padding: 10px;
-      }
     }
 
     .floating-button {
@@ -216,52 +112,13 @@
   </div>
 </section>
 
-<!-- Новый декоративный блок -->
-<div class="transition-block">
-  <div class="transition-text">ты думал тут что то будет</div>
-</div>
-
-<!-- Факты -->
-<section class="facts-container" id="facts">
-  <div class="fact-box">
-    <img class="fact-img" src="URL_КАРТИНКИ_1" alt="Факт 1">
-    <div class="fact-text">босс я устал ( картинки завтра завезу).</div>
-  </div>
-  <div class="fact-box">
-    <img class="fact-img" src="URL_КАРТИНКИ_2" alt="Факт 2">
-    <div class="fact-text">арбузнй лор(д)</div>
-  </div>
-  <div class="fact-box">
-    <img class="fact-img" src="URL_КАРТИНКИ_3" alt="Факт 3">
-    <div class="fact-text">савек превет.</div>
-  </div>
-</section>
-
 <!-- Кнопка -->
 <a href="/clicker/" class="floating-button" target="_blank">
   <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cleker.png" alt="Кнопка">
 </a>
 
 <script>
-  let triggered = false;
-  window.addEventListener('scroll', () => {
-    if (!triggered && window.scrollY > 10) {
-      triggered = true;
-      document.getElementById('facts').scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.2 });
-
-  document.querySelectorAll('.fact-box').forEach(box => {
-    observer.observe(box);
-  });
+  // Удаляем скрипт автоматической прокрутки, так как она больше не нужна
 </script>
 
 </body>
