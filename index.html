@@ -84,15 +84,17 @@
       position: relative;
       display: flex;
       justify-content: flex-start;
-      align-items: center;
+      align-items: flex-start; /* Изменил на flex-start */
       padding: 0 10%;
       height: 100vh;
       z-index: 1;
-      margin-top: 70px; /* Добавляем отступ для навигации */
+      margin-top: 70px;
+      padding-top: 10vh; /* Добавил отступ сверху */
     }
 
     .hero-content {
       max-width: 1000px;
+      margin-top: 5vh; /* Дополнительный отступ сверху */
     }
 
     .hero-title {
@@ -160,6 +162,11 @@
       
       .hero {
         margin-top: 60px;
+        padding-top: 8vh;
+      }
+      
+      .hero-content {
+        margin-top: 3vh;
       }
     }
   </style>
