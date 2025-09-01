@@ -24,6 +24,53 @@
       position: relative;
     }
 
+    /* Навигационное меню */
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+    }
+
+    .nav-button {
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+      text-align: center;
+      flex: 1;
+    }
+
+    .nav-button:hover {
+      color: #ccc;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 24px;
+      background-color: white;
+      margin: 0 8px;
+      opacity: 0.6;
+    }
+
     /* ---- particles.js container ---- */
     #particles-js {
       position: absolute;
@@ -41,6 +88,7 @@
       padding: 0 10%;
       height: 100vh;
       z-index: 1;
+      margin-top: 70px; /* Добавляем отступ для навигации */
     }
 
     .hero-content {
@@ -88,6 +136,20 @@
     }
 
     @media (max-width: 700px) {
+      .nav-buttons {
+        width: 90%;
+      }
+      
+      .nav-button {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+      }
+      
+      .nav-divider {
+        height: 20px;
+        margin: 0 5px;
+      }
+      
       .hero-title {
         font-size: 3rem;
       }
@@ -95,10 +157,31 @@
       .hero-subtitle {
         font-size: 1.2rem;
       }
+      
+      .hero {
+        margin-top: 60px;
+      }
     }
   </style>
 </head>
 <body>
+
+<!-- Навигационное меню -->
+<nav class="nav-menu">
+  <div class="nav-container">
+    <div class="nav-buttons">
+      <a href="ссилка1" class="nav-button">Обо мне</a>
+      <div class="nav-divider"></div>
+      <a href="ссилка2" class="nav-button">Ссылки</a>
+      <div class="nav-divider"></div>
+      <a href="ссилка3" class="nav-button">Ресурсы</a>
+      <div class="nav-divider"></div>
+      <a href="ссилка4" class="nav-button">Отправить арт</a>
+      <div class="nav-divider"></div>
+      <a href="ссилка5" class="nav-button">FaQ</a>
+    </div>
+  </div>
+</nav>
 
 <!-- particles.js container -->
 <div id="particles-js"></div>
@@ -184,7 +267,7 @@
         }
       },
       "interactivity": {
-        "detect_on": "window", // Изменили на "window" вместо "canvas"
+        "detect_on": "window",
         "events": {
           "onhover": {
             "enable": true,
@@ -211,7 +294,7 @@
             "speed": 3
           },
           "repulse": {
-            "distance": 100, // Увеличили расстояние отталкивания
+            "distance": 100,
             "duration": 0.4
           },
           "push": {
