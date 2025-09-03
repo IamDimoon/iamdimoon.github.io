@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="icon" href="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/favicon.png" type="image/png">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IamDimon</title>
   <style>
@@ -11,10 +13,27 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      overflow: hidden;
+      height: 100%;
+    }
+
     body {
       font-family: 'Arial', sans-serif;
       color: white;
       background-color: #000;
+      position: relative;
+    }
+
+    /* Анимации */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Навигационное меню */
@@ -23,11 +42,9 @@
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 1000;
+      z-index: 10;
       padding: 20px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      animation: fadeInDown 0.5s ease-out;
     }
 
     .nav-container {
@@ -52,7 +69,15 @@
       transition: color 0.3s ease;
       text-align: center;
       flex: 1;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
     }
+
+    .nav-button:nth-child(1) { animation-delay: 0.15s; }
+    .nav-button:nth-child(3) { animation-delay: 0.3s; }
+    .nav-button:nth-child(5) { animation-delay: 0.45s; }
+    .nav-button:nth-child(7) { animation-delay: 0.6s; }
+    .nav-button:nth-child(9) { animation-delay: 0.75s; }
 
     .nav-button:hover {
       color: #ccc;
@@ -67,45 +92,69 @@
       opacity: 0.6;
     }
 
-    /* Контент */
-    .content {
-      margin-top: 100px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 200vh; /* место на 2 экрана */
+    /* ---- particles.js container ---- */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      z-index: 0;
     }
 
-    .box {
-      border: 2px solid white;
-      padding: 40px;
+    /* Центрированная рамка под меню */
+    .center-box {
+      position: relative;
+      margin: 150px auto 0 auto;
+      width: 50%;
+      min-height: 100px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      font-size: 2rem;
-      margin-top: 50px;
+      color: white;
+      font-size: 1.5rem;
+      padding: 20px;
+      z-index: 10;
+      opacity: 0;
+      animation: fadeIn 0.75s ease forwards;
+      animation-delay: 1s;
     }
 
     @media (max-width: 700px) {
       .nav-buttons {
         width: 90%;
       }
-
+      
       .nav-button {
         font-size: 0.9rem;
         padding: 10px 12px;
       }
-
+      
       .nav-divider {
         height: 20px;
         margin: 0 5px;
+      }
+
+      .center-box {
+        width: 80%;
+        font-size: 1.2rem;
       }
     }
   </style>
 </head>
 <body>
 
+<!-- particles.js container -->
+<div id="particles-js"></div>
+
 <!-- Навигационное меню -->
 <nav class="nav-menu">
-  <a href="https://iamdimon.ru/" class="nav-button">Главная</a>
   <div class="nav-container">
     <div class="nav-buttons">
       <a href="https://iamdimon.ru/aboutme" class="nav-button">Обо мне</a>
@@ -121,10 +170,43 @@
   </div>
 </nav>
 
-<!-- Контент -->
-<div class="content">
-  <div class="box">текст1</div>
+<!-- Центрированная рамка -->
+<div class="center-box">
+  текст для страницы с фоном
 </div>
+
+<!-- Подключение particles.js с CDN -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script>
+  // Инициализация частиц после полной загрузки страницы
+  window.onload = function() {
+    particlesJS('particles-js', {
+      "particles": {
+        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#ffffff" },
+        "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
+        "opacity": { "value": 0.5 },
+        "size": { "value": 3, "random": true },
+        "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+        "move": { "enable": true, "speed": 3, "direction": "none", "out_mode": "out" }
+      },
+      "interactivity": {
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": true, "mode": "push" },
+          "resize": true
+        },
+        "modes": {
+          "repulse": { "distance": 100, "duration": 0.4 },
+          "push": { "particles_nb": 4 }
+        }
+      },
+      "retina_detect": true
+    });
+    console.log('Particles.js initialized successfully');
+  };
+</script>
 
 </body>
 </html>
