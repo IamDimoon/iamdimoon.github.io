@@ -18,6 +18,26 @@ body{
     min-height:80vh;
 }
 
+/* ===== ВЕРХНИЙ БАННЕР ===== */
+.top-banner{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:50px;
+}
+
+.top-banner img{
+    max-width:420px;
+    width:90%;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse{
+    0%{ transform: scale(1); }
+    50%{ transform: scale(1.06); }
+    100%{ transform: scale(1); }
+}
+
 /* Сетка */
 .grid{
     max-width:1100px;
@@ -90,13 +110,11 @@ body{
     flex-wrap:wrap;
 }
 
-/* Лого картинка */
 .footer-logo img{
     height:40px;
     margin-bottom:18px;
 }
 
-/* Ссылки */
 .footer-links{
     display:flex;
     flex-wrap:wrap;
@@ -136,7 +154,15 @@ body{
 <body>
 
 <div class="main">
+
+    <!-- Верхняя анимированная картинка -->
+    <div class="top-banner">
+        <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/wigoda.png">
+    </div>
+
+    <!-- Команды -->
     <div class="grid" id="teams"></div>
+
 </div>
 
 <!-- ФУТЕР -->
@@ -146,9 +172,8 @@ body{
         <div class="footer-top">
             <div>
 
-                <!-- СЮДА ВСТАВЛЯЕШЬ СВОЙ ЛОГОТИП -->
                 <div class="footer-logo">
-                    <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/e64d006156d9ca2fe1b41f452532eab78cf232f3/cubostavki/cubostavki.png" alt="logo">
+                    <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/e64d006156d9ca2fe1b41f452532eab78cf232f3/cubostavki/cubostavki.png">
                 </div>
 
                 <div class="footer-links">
@@ -159,7 +184,7 @@ body{
                 </div>
 
                 <div class="copy">
-                    © 1488-2025 Cubostavki. Ne nastoyaщi sait cuboservera eto prosto shutka ya nikakoi otvetstvennosi ne nesu.
+                    © 2021-2025 Cubostavki. Это шуточный сайт, не связан с Cuboserver.
                 </div>
             </div>
 
