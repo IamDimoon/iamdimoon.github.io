@@ -2,8 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Mem Bets</title>
-
+<title>Cubostavki</title>
 <style>
 body{
     margin:0;
@@ -12,29 +11,9 @@ body{
     font-family: Inter, Arial, sans-serif;
 }
 
-/* Контент */
 .main{
     padding:40px 20px 60px 20px;
     min-height:80vh;
-}
-
-/* ===== БАННЕР ===== */
-.top-banner{
-    display:flex;
-    justify-content:center;
-    margin-bottom:60px;
-}
-
-.top-banner img{
-    max-width:1000px;
-    width:95%;
-    animation: pulse 3s ease-in-out infinite;
-}
-
-@keyframes pulse{
-    0%{ transform: scale(1); }
-    50%{ transform: scale(1.06); }
-    100%{ transform: scale(1); }
 }
 
 /* ===== РУЛЕТКА ===== */
@@ -66,7 +45,6 @@ body{
     display:flex;
     align-items:center;
     height:100%;
-    transition: transform 4s cubic-bezier(.1,.7,.1,1);
 }
 
 .roulette-item{
@@ -127,120 +105,21 @@ body{
     font-weight:600;
     cursor:pointer;
 }
-
-/* ===== ФУТЕР ===== */
-.footer{
-    width:100%;
-    background:linear-gradient(180deg,#020617,#020617ee);
-    border-top:1px solid #111827;
-    margin-top:60px;
-}
-
-.footer-inner{
-    max-width:1200px;
-    margin:auto;
-    padding:30px 20px;
-}
-
-.footer-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    flex-wrap:wrap;
-}
-
-.footer-logo img{
-    height:40px;
-    margin-bottom:18px;
-}
-
-.footer-links{
-    display:flex;
-    flex-wrap:wrap;
-    gap:24px;
-    margin-bottom:18px;
-}
-
-.footer-links a{
-    color:#94a3b8;
-    text-decoration:none;
-    font-size:14px;
-}
-
-.footer-links a:hover{
-    color:white;
-}
-
-.copy{
-    font-size:13px;
-    color:#64748b;
-}
-
-.social{
-    display:flex;
-    gap:16px;
-}
-
-.social div{
-    width:22px;
-    height:22px;
-    background:#334155;
-    border-radius:6px;
-}
 </style>
 </head>
-
 <body>
-
 <div class="main">
 
-    <!-- БАННЕР -->
-    <div class="top-banner">
-        <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/wigoda.png">
-    </div>
-
-    <!-- РУЛЕТКА -->
     <div class="roulette-wrap">
         <div class="roulette-container">
             <div class="pointer">▼</div>
             <div class="roulette-track" id="rouletteTrack"></div>
         </div>
-        <button class="spin-btn" onclick="spin()">Крутить рулетку</button>
+        <button class="spin-btn" onclick="startSpin()">Крутить рулетку</button>
+        <button class="spin-btn" onclick="stopSpin()">Стоп</button>
     </div>
 
-    <!-- КОМАНДЫ -->
     <div class="grid" id="teams"></div>
-
-</div>
-
-<div class="footer">
-    <div class="footer-inner">
-        <div class="footer-top">
-            <div>
-
-                <div class="footer-logo">
-                    <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/e64d006156d9ca2fe1b41f452532eab78cf232f3/cubostavki/cubostavki.png">
-                </div>
-
-                <div class="footer-links">
-                    <a href="#">Контакты</a>
-                    <a href="#">Пользовательское соглашение</a>
-                    <a href="#">Правила</a>
-                    <a href="#">Политика возврата средств</a>
-                </div>
-
-                <div class="copy">
-                    © 1488-2025 Cubostavki. Ne nastoyaщi sait cuboservera eto prosto shutka ya nikakoi otvetstvennosi ne nesu
-                </div>
-            </div>
-
-            <div class="social">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>
@@ -257,9 +136,10 @@ const teams = [
 
 const track = document.getElementById("rouletteTrack");
 
+// создаём бесконечный ряд и дублируем
 function buildRoulette(){
     let html="";
-    for(let i=0;i<20;i++){
+    for(let i=0;i<3;i++){ // дублируем 3 раза для плавного зацикливания
         teams.forEach(t=>{
             html+=`<div class="roulette-item"><img src="${t.img}"></div>`;
         });
@@ -267,54 +147,30 @@ function buildRoulette(){
     track.innerHTML = html;
 }
 
-function spin(){
-    const itemWidth = 160;
-    const winnerIndex = Math.floor(Math.random() * teams.length);
+let pos = 0;
+let speed = 0;
+let animId;
 
-    const loops = 50; // много оборотов = "крутим со всей силы"
-    const move = (loops * teams.length + winnerIndex) * itemWidth;
+function animate(){
+    pos -= speed;
+    if(pos <= -track.scrollWidth/3){ // зацикливаем
+        pos = 0;
+    }
+    track.style.transform = `translateX(${pos}px)`;
+    animId = requestAnimationFrame(animate);
+}
 
-    track.style.transition = 'transform 5s cubic-bezier(0.33, 1, 0.68, 1)'; // ускорение+торможение
-    track.style.transform = `translateX(-${move}px)`;
+function startSpin(){
+    speed = 10 + Math.random()*10; // рандомная быстрая скорость
+    cancelAnimationFrame(animId);
+    animate();
+}
 
-    // Сбрасываем transition после завершения анимации
-    setTimeout(() => {
-        track.style.transition = 'none';
-        track.style.transform = `translateX(-${winnerIndex * itemWidth}px)`;
-    }, 5200);
+function stopSpin(){
+    speed = 0;
 }
 
 buildRoulette();
-
-function getVotes(){
-    return JSON.parse(localStorage.getItem("votes")||"{}");
-}
-
-function vote(id){
-    let v=getVotes();
-    v[id]=(v[id]||0)+1;
-    localStorage.setItem("votes",JSON.stringify(v));
-    render();
-}
-
-function render(){
-    const container=document.getElementById("teams");
-    const votes=getVotes();
-    container.innerHTML="";
-
-    teams.forEach(t=>{
-        container.innerHTML+=`
-        <div class="team">
-            <img src="${t.img}">
-            <h3>${t.name}</h3>
-            <button class="vote-btn" onclick="vote(${t.id})">Голосовать</button>
-            <div>Голосов: ${votes[t.id]||0}</div>
-        </div>`;
-    });
-}
-
-render();
 </script>
-
 </body>
 </html>
