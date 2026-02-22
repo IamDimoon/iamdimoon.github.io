@@ -128,7 +128,7 @@ body{
     cursor:pointer;
 }
 
-/* ===== ТВОЯ ПАНЕЛЬ СНИЗУ ===== */
+/* ===== ФУТЕР ===== */
 .footer{
     width:100%;
     background:linear-gradient(180deg,#020617,#020617ee);
@@ -213,10 +213,8 @@ body{
 
 </div>
 
-<!-- ===== ПАНЕЛЬ СНИЗУ ===== -->
 <div class="footer">
     <div class="footer-inner">
-
         <div class="footer-top">
             <div>
 
@@ -242,23 +240,21 @@ body{
                 <div></div>
             </div>
         </div>
-
     </div>
 </div>
 
 <script>
 const teams = [
-    {id:0,name:"Команда 1",img:"team1.jpg"},
-    {id:1,name:"Команда 2",img:"team2.jpg"},
-    {id:2,name:"Команда 3",img:"team3.jpg"},
-    {id:3,name:"Команда 4",img:"team4.jpg"},
-    {id:4,name:"Команда 5",img:"team5.jpg"},
-    {id:5,name:"Команда 6",img:"team6.jpg"},
-    {id:6,name:"Команда 7",img:"team7.jpg"},
-    {id:7,name:"Команда 8",img:"team8.jpg"}
-};
+    {id:0,name:"Красные",img:"https://media.discordapp.net/attachments/1185829351648940082/1474754105875497052/RED_3.png"},
+    {id:1,name:"Оранжевые",img:"https://media.discordapp.net/attachments/1185829351648940082/1474754104952885299/ORANGE_3.png"},
+    {id:2,name:"Жёлтые",img:"https://media.discordapp.net/attachments/1185829351648940082/1474754104390586378/YELLOW_4.png"},
+    {id:3,name:"Зелёные",img:"https://media.discordapp.net/attachments/1185829351648940082/1474754102960455680/GREEN_3.png"},
+    {id:4,name:"Аква",img:"https://media.discordapp.net/attachments/1185829351648940082/1474754102146629735/AQUA_3.png"},
+    {id:5,name:"Синие",img:"https://media.discordapp.net/attachments/1185829351648940082/1474754102616657930/BLUE_3.png"},
+    {id:6,name:"Фиолетовые",img:"https://media.discordapp.net/attachments/1185829351648940082/1474754105321722147/PURPLE_5.png"},
+    {id:7,name:"Розовые",img:"https://media.discordapp.net/attachments/1185829351648940082/1474754103367434252/PINK_3_2.png"}
+];
 
-/* РУЛЕТКА */
 const track = document.getElementById("rouletteTrack");
 
 function buildRoulette(){
@@ -281,7 +277,6 @@ function spin(){
 
 buildRoulette();
 
-/* ГОЛОСА */
 function getVotes(){
     return JSON.parse(localStorage.getItem("votes")||"{}");
 }
