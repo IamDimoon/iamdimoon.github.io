@@ -26,6 +26,7 @@ body{margin:0;background:#000;color:#cbd5e1;font-family: Inter, Arial, sans-seri
 .vote-btn{padding:6px 16px;border:none;border-radius:8px;background:#1d4ed8;color:white;font-weight:600;cursor:pointer;width:120px;align-self:flex-start;}
 .vote-btn:disabled{background:#555;cursor:not-allowed;}
 .team-votes{flex: 0 0 60px;text-align:center;font-weight:700;font-size:18px;color:#fff;}
+.vote-note{font-size:13px;color:#94a3b8;margin-top:8px;text-align:center;}
 .footer{width:100%;background:linear-gradient(180deg,#020617,#020617ee);border-top:1px solid #111827;margin-top:60px;}
 .footer-inner{max-width:1200px;margin:auto;padding:30px 20px;}
 .footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;}
@@ -54,6 +55,7 @@ body{margin:0;background:#000;color:#cbd5e1;font-family: Inter, Arial, sans-seri
     </div>
 
     <div class="grid" id="teams"></div>
+    <div class="vote-note">Все голоса локальны, это чисто визуально</div>
 </div>
 
 <div class="footer">
@@ -94,10 +96,6 @@ const teams = [
 
 const track = document.getElementById("rouletteTrack");
 
-// Обнуляем старые голоса при загрузке
-localStorage.setItem("votes", JSON.stringify({}));
-localStorage.setItem("userVotes", JSON.stringify({}));
-
 function buildRoulette(){
     let html="";
     for(let i=0;i<20;i++){
@@ -123,7 +121,6 @@ function getUserVotes(){return JSON.parse(localStorage.getItem("userVotes")||"{}
 
 function vote(id){
     const userVotes = getUserVotes();
-    // проверяем, проголосовал ли пользователь уже за любую команду
     if(Object.keys(userVotes).length>0) return; 
     let votes = getVotes();
     votes[id] = (votes[id]||0)+1;
