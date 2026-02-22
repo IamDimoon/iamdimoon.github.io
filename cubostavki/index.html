@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Mem Bets</title>
+<title>Cubostavki</title>
 
 <style>
 body{
@@ -256,6 +256,7 @@ const teams = [
 ];
 
 const track = document.getElementById("rouletteTrack");
+let currentOffset = 0;
 
 function buildRoulette(){
     let html="";
@@ -270,9 +271,19 @@ function buildRoulette(){
 function spin(){
     const itemWidth = 160;
     const winnerIndex = Math.floor(Math.random()*teams.length);
-    const loops = 10;
+    const loops = 20; // Сделаем больше вращений для эффекта
     const move = (loops * teams.length + winnerIndex) * itemWidth;
-    track.style.transform = `translateX(-${move}px)`;
+
+    // Сбрасываем transition, чтобы каждый раз анимация была одинаковой
+    track.style.transition = "none";
+    track.style.transform = `translateX(-${currentOffset}px)`;
+
+    // Даем браузеру время применить стиль без transition
+    setTimeout(()=>{
+        currentOffset += move;
+        track.style.transition = "transform 4s cubic-bezier(.1,.7,.1,1)";
+        track.style.transform = `translateX(-${currentOffset}px)`;
+    }, 50);
 }
 
 buildRoulette();
