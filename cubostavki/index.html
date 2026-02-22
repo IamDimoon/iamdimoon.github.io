@@ -78,7 +78,7 @@ body{
     margin:auto;
     display:flex;
     flex-direction: column;
-    gap:20px;
+    gap:15px;
 }
 
 .team-block{
@@ -87,12 +87,7 @@ body{
     background:#0f172a; /* тёмно-синий */
     border-radius:12px;
     padding:10px 20px;
-    transition: all 0.3s ease;
-    min-height:80px;
-}
-
-.team-block:hover{
-    background:#1c2a47;
+    min-height:100px;
 }
 
 .team-icon{
@@ -113,7 +108,13 @@ body{
 }
 
 .team-info h3{
-    margin:0 0 8px 0;
+    margin:0 0 6px 0;
+}
+
+.player-names{
+    font-size:14px;
+    color:#cbd5e1;
+    margin-bottom:6px;
 }
 
 .vote-btn{
@@ -125,6 +126,7 @@ body{
     font-weight:600;
     cursor:pointer;
     width:120px;
+    align-self:flex-start;
 }
 
 /* Счётчик голосов */
@@ -157,14 +159,14 @@ body{
 
 <script>
 const teams = [
-    {id:0,name:"Красные",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/1q.webp"},
-    {id:1,name:"Оранжевые",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/2q.webp"},
-    {id:2,name:"Жёлтые",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/3q.webp"},
-    {id:3,name:"Зелёные",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/4q.webp"},
-    {id:4,name:"Аква",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/5q.webp"},
-    {id:5,name:"Синие",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/6q.webp"},
-    {id:6,name:"Фиолетовые",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/7q.webp"},
-    {id:7,name:"Розовые",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/8q.webp"}
+    {id:0,name:"🔴Красные Ктоэто",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/1q.webp",players:["neAlexei4884","gess72","fnvsk","Ray_Raven"]},
+    {id:1,name:"🟠Оранжевые Лохматые",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/2q.webp",players:["sinouu","Pajojda_1","D1alm","glebbomj_"]},
+    {id:2,name:"🟡Желтое Пиво",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/3q.webp",players:["qStoryteller","Meyerhold","Runya0490","_GeWa"]},
+    {id:3,name:"🟢Зеленые Cлоники",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/4q.webp",players:["vanoki","itsPKJ_","_ZeOoOoOoN_","NickeyKV"]},
+    {id:4,name:"🩵Голубые Смурфы",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/5q.webp",players:["N7ghtmare","Urec2247","___Meli___","_Cerebr0_"]},
+    {id:5,name:"🔵Синие Котакбасы",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/6q.webp",players:["Mslan_G","J3mph","Lilredisx3","Isenyor"]},
+    {id:6,name:"🟣Фиолетовые Злодеи",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/7q.webp",players:["Smash131","Bikelt","_Halico_","Lolotrack"]},
+    {id:7,name:"🩷Розовые Незабудки",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/8q.webp",players:["Ya_Eto_Chepyha","Nexital","ametist_","IamDimoon"]}
 ];
 
 const track = document.getElementById("rouletteTrack");
@@ -209,14 +211,14 @@ function render(){
     const sortedTeams = [...teams].sort((a,b)=> (votes[b.id]||0) - (votes[a.id]||0));
 
     sortedTeams.forEach(t=>{
-        const blockHeight = 80 + (votes[t.id]||0)*5; // увеличение высоты в зависимости от голосов
         container.innerHTML+=`
-        <div class="team-block" style="height:${blockHeight}px">
+        <div class="team-block">
             <div class="team-icon">
                 <img src="${t.img}">
             </div>
             <div class="team-info">
                 <h3>${t.name}</h3>
+                <div class="player-names">${t.players.join(' ')}</div>
                 <button class="vote-btn" onclick="vote(${t.id})">Голосовать</button>
             </div>
             <div class="team-votes">${votes[t.id]||0}</div>
