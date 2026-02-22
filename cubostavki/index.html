@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Cubostavki</title>
+<title>Mem Bets</title>
 
 <style>
 body{
@@ -49,7 +49,7 @@ body{
     overflow:hidden;
     border:2px solid #1e293b;
     border-radius:12px;
-    height:280px; /* увеличили в 2 раза */
+    height:280px; /* увеличенная высота */
     background:#020617;
 }
 
@@ -66,18 +66,18 @@ body{
     display:flex;
     align-items:center;
     height:100%;
-    transition: transform 5s cubic-bezier(.1,.7,.1,1); /* 5 секунд на полный прокрут */
+    transition: transform 5s cubic-bezier(.1,.7,.1,1); /* 5 секунд на полный спин */
+    justify-content: flex-start; /* картинки в ряд */
 }
 
 .roulette-item{
-    min-width:160px;
     padding:10px;
 }
 
 .roulette-item img{
-    width:100%;
-    height:200px; /* увеличили в 2 раза */
-    object-fit:cover;
+    height:100%; /* по высоте контейнера */
+    width:auto;  /* сохраняем пропорции */
+    object-fit:contain; /* чтобы не обрезалось */
     border-radius:8px;
 }
 
@@ -259,7 +259,7 @@ const track = document.getElementById("rouletteTrack");
 
 function buildRoulette(){
     let html = '';
-    for(let i=0;i<20;i++){ // много повторов для заполнения
+    for(let i=0;i<2;i++){ // повторяем два раза чтобы закрыть длину
         teams.forEach(t=>{
             html += `<div class="roulette-item"><img src="${t.img}"></div>`;
         });
@@ -270,10 +270,10 @@ function buildRoulette(){
 function spin(){
     const itemWidth = 160;
     const winnerIndex = Math.floor(Math.random()*teams.length);
-    const loops = 1; // один полный цикл
+    const loops = 1; // один полный проход
     const move = (loops * teams.length + winnerIndex) * itemWidth;
-    track.style.transition = 'transform 5s cubic-bezier(.1,.7,.1,1)'; // 5 секунд на полный круг
-    track.style.transform = `translateX(-${move}px)`;
+    track.style.transition = 'transform 5s cubic-bezier(.1,.7,.1,1)';
+    track.style.transform = `translateX(-${move}px)`; // движение справа налево
 }
 
 buildRoulette();
