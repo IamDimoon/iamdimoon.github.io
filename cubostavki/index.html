@@ -5,7 +5,6 @@
 <title>Mem Bets</title>
 
 <style>
-/* ===== БАЗА ===== */
 body{
     margin:0;
     background:#000;
@@ -13,13 +12,13 @@ body{
     font-family: Inter, Arial, sans-serif;
 }
 
-/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+/* Контент */
 .main{
-    min-height:100vh;
-    padding:40px 20px 160px 20px;
+    padding:40px 20px 60px 20px;
+    min-height:80vh;
 }
 
-/* ===== СЕТКА КОМАНД ===== */
+/* Сетка */
 .grid{
     max-width:1100px;
     margin:auto;
@@ -70,14 +69,12 @@ body{
     opacity:0.7;
 }
 
-/* ===== ФУТЕР КАК НА СКРИНЕ ===== */
+/* ===== ФУТЕР ===== */
 .footer{
-    position:fixed;
-    bottom:0;
-    left:0;
     width:100%;
     background:linear-gradient(180deg,#020617,#020617ee);
     border-top:1px solid #111827;
+    margin-top:60px;
 }
 
 .footer-inner{
@@ -86,12 +83,16 @@ body{
     padding:30px 20px;
 }
 
-/* Лого */
-.logo{
-    font-size:28px;
-    font-weight:900;
-    letter-spacing:2px;
-    color:white;
+.footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+/* Лого картинка */
+.footer-logo img{
+    height:40px;
     margin-bottom:18px;
 }
 
@@ -113,18 +114,9 @@ body{
     color:white;
 }
 
-/* Копирайт */
 .copy{
     font-size:13px;
     color:#64748b;
-}
-
-/* Иконки справа */
-.footer-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    flex-wrap:wrap;
 }
 
 .social{
@@ -144,18 +136,20 @@ body{
 <body>
 
 <div class="main">
-
     <div class="grid" id="teams"></div>
-
 </div>
 
-<!-- ===== ФУТЕР ===== -->
+<!-- ФУТЕР -->
 <div class="footer">
     <div class="footer-inner">
 
         <div class="footer-top">
             <div>
-                <div class="logo">CUBOSERVER</div>
+
+                <!-- СЮДА ВСТАВЛЯЕШЬ СВОЙ ЛОГОТИП -->
+                <div class="footer-logo">
+                    <img src="logo.png" alt="logo">
+                </div>
 
                 <div class="footer-links">
                     <a href="#">Контакты</a>
@@ -165,7 +159,7 @@ body{
                 </div>
 
                 <div class="copy">
-                    © 2021-2025 Cuboserver. Not an official Minecraft product.
+                    © 2021-2025 YourSite. Not an official Minecraft product.
                 </div>
             </div>
 
@@ -205,7 +199,6 @@ function vote(id){
 function render(){
     const container=document.getElementById("teams");
     const votes=getVotes();
-
     container.innerHTML="";
 
     teams.forEach(t=>{
