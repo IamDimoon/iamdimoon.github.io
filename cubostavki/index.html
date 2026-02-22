@@ -53,7 +53,6 @@ body{
     background:#020617;
 }
 
-/* стрелка */
 .pointer{
     position:absolute;
     left:50%;
@@ -63,7 +62,6 @@ body{
     z-index:5;
 }
 
-/* лента */
 .roulette-track{
     display:flex;
     align-items:center;
@@ -94,7 +92,7 @@ body{
     cursor:pointer;
 }
 
-/* ===== СЕТКА КОМАНД ===== */
+/* ===== СЕТКА ===== */
 .grid{
     max-width:1100px;
     margin:auto;
@@ -130,7 +128,7 @@ body{
     cursor:pointer;
 }
 
-/* ===== ФУТЕР ===== */
+/* ===== ТВОЯ ПАНЕЛЬ СНИЗУ ===== */
 .footer{
     width:100%;
     background:linear-gradient(180deg,#020617,#020617ee);
@@ -142,6 +140,52 @@ body{
     max-width:1200px;
     margin:auto;
     padding:30px 20px;
+}
+
+.footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+.footer-logo img{
+    height:40px;
+    margin-bottom:18px;
+}
+
+.footer-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-bottom:18px;
+}
+
+.footer-links a{
+    color:#94a3b8;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.footer-links a:hover{
+    color:white;
+}
+
+.copy{
+    font-size:13px;
+    color:#64748b;
+}
+
+.social{
+    display:flex;
+    gap:16px;
+}
+
+.social div{
+    width:22px;
+    height:22px;
+    background:#334155;
+    border-radius:6px;
 }
 </style>
 </head>
@@ -169,10 +213,36 @@ body{
 
 </div>
 
-<!-- ФУТЕР -->
+<!-- ===== ПАНЕЛЬ СНИЗУ ===== -->
 <div class="footer">
     <div class="footer-inner">
-        © Cubostavki meme site
+
+        <div class="footer-top">
+            <div>
+
+                <div class="footer-logo">
+                    <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/e64d006156d9ca2fe1b41f452532eab78cf232f3/cubostavki/cubostavki.png">
+                </div>
+
+                <div class="footer-links">
+                    <a href="#">Контакты</a>
+                    <a href="#">Пользовательское соглашение</a>
+                    <a href="#">Правила</a>
+                    <a href="#">Политика возврата средств</a>
+                </div>
+
+                <div class="copy">
+                    © 1488-2025 Cubostavki. Ne nastoyaщi sait cuboservera eto prosto shutka ya nikakoi otvetstvennosi ne nesu
+                </div>
+            </div>
+
+            <div class="social">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -186,20 +256,16 @@ const teams = [
     {id:5,name:"Команда 6",img:"team6.jpg"},
     {id:6,name:"Команда 7",img:"team7.jpg"},
     {id:7,name:"Команда 8",img:"team8.jpg"}
-];
+};
 
-/* ===== РУЛЕТКА ===== */
+/* РУЛЕТКА */
 const track = document.getElementById("rouletteTrack");
 
-/* делаем длинную ленту */
 function buildRoulette(){
     let html="";
     for(let i=0;i<20;i++){
         teams.forEach(t=>{
-            html+=`
-            <div class="roulette-item">
-                <img src="${t.img}">
-            </div>`;
+            html+=`<div class="roulette-item"><img src="${t.img}"></div>`;
         });
     }
     track.innerHTML = html;
@@ -208,17 +274,14 @@ function buildRoulette(){
 function spin(){
     const itemWidth = 160;
     const winnerIndex = Math.floor(Math.random()*teams.length);
-
     const loops = 10;
     const move = (loops * teams.length + winnerIndex) * itemWidth;
-
-    track.style.transition = "transform 4s cubic-bezier(.1,.7,.1,1)";
     track.style.transform = `translateX(-${move}px)`;
 }
 
 buildRoulette();
 
-/* ===== ГОЛОСОВАНИЕ ===== */
+/* ГОЛОСА */
 function getVotes(){
     return JSON.parse(localStorage.getItem("votes")||"{}");
 }
