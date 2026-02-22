@@ -41,12 +41,10 @@ body{margin:0;background:#000;color:#cbd5e1;font-family: Inter, Arial, sans-seri
 <body>
 
 <div class="main">
-    <!-- БАННЕР -->
     <div class="top-banner">
         <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/wigoda.png">
     </div>
 
-    <!-- РУЛЕТКА -->
     <div class="roulette-wrap">
         <div class="roulette-container">
             <div class="pointer">▼</div>
@@ -55,11 +53,9 @@ body{margin:0;background:#000;color:#cbd5e1;font-family: Inter, Arial, sans-seri
         <button class="spin-btn" onclick="spin()">Крутить рулетку</button>
     </div>
 
-    <!-- КОМАНДЫ -->
     <div class="grid" id="teams"></div>
 </div>
 
-<!-- ФУТЕР -->
 <div class="footer">
     <div class="footer-inner">
         <div class="footer-top">
@@ -98,6 +94,10 @@ const teams = [
 
 const track = document.getElementById("rouletteTrack");
 
+// Обнуляем старые голоса при загрузке
+localStorage.setItem("votes", JSON.stringify({}));
+localStorage.setItem("userVotes", JSON.stringify({}));
+
 function buildRoulette(){
     let html="";
     for(let i=0;i<20;i++){
@@ -123,12 +123,13 @@ function getUserVotes(){return JSON.parse(localStorage.getItem("userVotes")||"{}
 
 function vote(id){
     const userVotes = getUserVotes();
-    if(userVotes[id]) return; // уже голосовал
-    let votes=getVotes();
-    votes[id]=(votes[id]||0)+1;
-    localStorage.setItem("votes",JSON.stringify(votes));
+    // проверяем, проголосовал ли пользователь уже за любую команду
+    if(Object.keys(userVotes).length>0) return; 
+    let votes = getVotes();
+    votes[id] = (votes[id]||0)+1;
+    localStorage.setItem("votes", JSON.stringify(votes));
     userVotes[id]=true;
-    localStorage.setItem("userVotes",JSON.stringify(userVotes));
+    localStorage.setItem("userVotes", JSON.stringify(userVotes));
     render();
 }
 
@@ -138,8 +139,9 @@ function render(){
     const userVotes=getUserVotes();
     container.innerHTML="";
     const sortedTeams = [...teams].sort((a,b)=> (votes[b.id]||0) - (votes[a.id]||0));
+    const hasVoted = Object.keys(userVotes).length>0;
     sortedTeams.forEach(t=>{
-        const disabled = userVotes[t.id] ? 'disabled' : '';
+        const disabled = hasVoted || userVotes[t.id] ? 'disabled' : '';
         container.innerHTML+=`
         <div class="team-block">
             <div class="team-icon">
