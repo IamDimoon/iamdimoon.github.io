@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Mem Bets</title>
+<title>Cubostavki</title>
 
 <style>
 body{
@@ -12,7 +12,6 @@ body{
     font-family: Inter, Arial, sans-serif;
 }
 
-/* Контент */
 .main{
     padding:40px 20px 60px 20px;
     min-height:80vh;
@@ -39,7 +38,7 @@ body{
 
 /* ===== РУЛЕТКА ===== */
 .roulette-wrap{
-    width:100vw; /* растянули на весь экран */
+    width:100vw;
     overflow:hidden;
     margin:0 auto 60px auto;
     text-align:center;
@@ -50,7 +49,7 @@ body{
     overflow:hidden;
     border:2px solid #1e293b;
     border-radius:12px;
-    height:140px;
+    height:280px; /* увеличили в 2 раза */
     background:#020617;
 }
 
@@ -67,6 +66,7 @@ body{
     display:flex;
     align-items:center;
     height:100%;
+    transition: transform 5s cubic-bezier(.1,.7,.1,1); /* 5 секунд на полный прокрут */
 }
 
 .roulette-item{
@@ -76,7 +76,7 @@ body{
 
 .roulette-item img{
     width:100%;
-    height:100px;
+    height:200px; /* увеличили в 2 раза */
     object-fit:cover;
     border-radius:8px;
 }
@@ -205,7 +205,7 @@ body{
             <div class="pointer">▼</div>
             <div class="roulette-track" id="rouletteTrack"></div>
         </div>
-        <button class="spin-btn" onclick="startSpin()">Крутить рулетку</button>
+        <button class="spin-btn" onclick="spin()">Крутить рулетку</button>
     </div>
 
     <!-- КОМАНДЫ -->
@@ -257,10 +257,9 @@ const teams = [
 
 const track = document.getElementById("rouletteTrack");
 
-// строим рулетку с дублированием для бесконечного эффекта
 function buildRoulette(){
     let html = '';
-    for(let i=0;i<5;i++){ // повторяем несколько раз для зацикливания
+    for(let i=0;i<20;i++){ // много повторов для заполнения
         teams.forEach(t=>{
             html += `<div class="roulette-item"><img src="${t.img}"></div>`;
         });
@@ -268,25 +267,13 @@ function buildRoulette(){
     track.innerHTML = html;
 }
 
-let pos = 0;
-let speed = 0;
-let animId;
-
-function animate(){
-    pos -= speed;
-    const totalWidth = track.scrollWidth / 5 * 4;
-    if(pos <= -totalWidth){
-        pos = 0;
-    }
-    track.style.transform = `translateX(${pos}px)`;
-    animId = requestAnimationFrame(animate);
-}
-
-function startSpin(){
-    const totalDistance = track.scrollWidth / 5 * teams.length; // 1 цикл
-    speed = totalDistance / (60 * 5); // 60 fps, 5 секунд на 1 цикл
-    cancelAnimationFrame(animId);
-    animate();
+function spin(){
+    const itemWidth = 160;
+    const winnerIndex = Math.floor(Math.random()*teams.length);
+    const loops = 1; // один полный цикл
+    const move = (loops * teams.length + winnerIndex) * itemWidth;
+    track.style.transition = 'transform 5s cubic-bezier(.1,.7,.1,1)'; // 5 секунд на полный круг
+    track.style.transform = `translateX(-${move}px)`;
 }
 
 buildRoulette();
