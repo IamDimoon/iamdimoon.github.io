@@ -269,10 +269,19 @@ function buildRoulette(){
 
 function spin(){
     const itemWidth = 160;
-    const winnerIndex = Math.floor(Math.random()*teams.length);
-    const loops = 10;
+    const winnerIndex = Math.floor(Math.random() * teams.length);
+
+    const loops = 50; // много оборотов = "крутим со всей силы"
     const move = (loops * teams.length + winnerIndex) * itemWidth;
+
+    track.style.transition = 'transform 5s cubic-bezier(0.33, 1, 0.68, 1)'; // ускорение+торможение
     track.style.transform = `translateX(-${move}px)`;
+
+    // Сбрасываем transition после завершения анимации
+    setTimeout(() => {
+        track.style.transition = 'none';
+        track.style.transform = `translateX(-${winnerIndex * itemWidth}px)`;
+    }, 5200);
 }
 
 buildRoulette();
