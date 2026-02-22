@@ -17,6 +17,25 @@ body{
     min-height:80vh;
 }
 
+/* ===== БАННЕР ===== */
+.top-banner{
+    display:flex;
+    justify-content:center;
+    margin-bottom:60px;
+}
+
+.top-banner img{
+    max-width:1000px;
+    width:95%;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse{
+    0%{ transform: scale(1); }
+    50%{ transform: scale(1.06); }
+    100%{ transform: scale(1); }
+}
+
 /* ===== РУЛЕТКА ===== */
 .roulette-wrap{
     max-width:1200px;
@@ -137,11 +156,76 @@ body{
     font-size:18px;
     color:#fff;
 }
+
+/* ===== ФУТЕР ===== */
+.footer{
+    width:100%;
+    background:linear-gradient(180deg,#020617,#020617ee);
+    border-top:1px solid #111827;
+    margin-top:60px;
+}
+
+.footer-inner{
+    max-width:1200px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+.footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+.footer-logo img{
+    height:40px;
+    margin-bottom:18px;
+}
+
+.footer-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-bottom:18px;
+}
+
+.footer-links a{
+    color:#94a3b8;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.footer-links a:hover{
+    color:white;
+}
+
+.copy{
+    font-size:13px;
+    color:#64748b;
+}
+
+.social{
+    display:flex;
+    gap:16px;
+}
+
+.social div{
+    width:22px;
+    height:22px;
+    background:#334155;
+    border-radius:6px;
+}
 </style>
 </head>
 <body>
 
 <div class="main">
+
+    <!-- БАННЕР -->
+    <div class="top-banner">
+        <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/wigoda.png">
+    </div>
 
     <!-- РУЛЕТКА -->
     <div class="roulette-wrap">
@@ -155,6 +239,33 @@ body{
     <!-- КОМАНДЫ -->
     <div class="grid" id="teams"></div>
 
+</div>
+
+<!-- ФУТЕР -->
+<div class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div>
+                <div class="footer-logo">
+                    <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/e64d006156d9ca2fe1b41f452532eab78cf232f3/cubostavki/cubostavki.png">
+                </div>
+                <div class="footer-links">
+                    <a href="#">Контакты</a>
+                    <a href="#">Пользовательское соглашение</a>
+                    <a href="#">Правила</a>
+                    <a href="#">Политика возврата средств</a>
+                </div>
+                <div class="copy">
+                    © 1488-2025 Cubostavki. Ne nastoyaщi sait cuboservera eto prosto shutka ya nikakoi otvetstvennosi ne nesu
+                </div>
+            </div>
+            <div class="social">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
