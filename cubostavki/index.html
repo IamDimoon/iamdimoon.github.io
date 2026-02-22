@@ -18,16 +18,15 @@ body{
     min-height:80vh;
 }
 
-/* ===== ВЕРХНИЙ БАННЕР ===== */
+/* ===== БАННЕР ===== */
 .top-banner{
     display:flex;
     justify-content:center;
-    align-items:center;
-    margin-bottom:70px;
+    margin-bottom:60px;
 }
 
 .top-banner img{
-    max-width:1000px;   /* УВЕЛИЧИЛ */
+    max-width:1000px;
     width:95%;
     animation: pulse 3s ease-in-out infinite;
 }
@@ -38,7 +37,64 @@ body{
     100%{ transform: scale(1); }
 }
 
-/* Сетка */
+/* ===== РУЛЕТКА ===== */
+.roulette-wrap{
+    max-width:900px;
+    margin:0 auto 60px auto;
+    text-align:center;
+}
+
+.roulette-container{
+    position:relative;
+    overflow:hidden;
+    border:2px solid #1e293b;
+    border-radius:12px;
+    height:140px;
+    background:#020617;
+}
+
+/* стрелка */
+.pointer{
+    position:absolute;
+    left:50%;
+    top:-18px;
+    transform:translateX(-50%);
+    font-size:32px;
+    z-index:5;
+}
+
+/* лента */
+.roulette-track{
+    display:flex;
+    align-items:center;
+    height:100%;
+    transition: transform 4s cubic-bezier(.1,.7,.1,1);
+}
+
+.roulette-item{
+    min-width:160px;
+    padding:10px;
+}
+
+.roulette-item img{
+    width:100%;
+    height:100px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.spin-btn{
+    margin-top:15px;
+    padding:12px 28px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* ===== СЕТКА КОМАНД ===== */
 .grid{
     max-width:1100px;
     margin:auto;
@@ -53,11 +109,6 @@ body{
     border-radius:14px;
     padding:14px;
     text-align:center;
-    transition:0.2s;
-}
-
-.team:hover{
-    border-color:#334155;
 }
 
 .team img{
@@ -79,16 +130,6 @@ body{
     cursor:pointer;
 }
 
-.vote-btn:hover{
-    background:#2563eb;
-}
-
-.votes{
-    margin-top:6px;
-    font-size:14px;
-    opacity:0.7;
-}
-
 /* ===== ФУТЕР ===== */
 .footer{
     width:100%;
@@ -102,52 +143,6 @@ body{
     margin:auto;
     padding:30px 20px;
 }
-
-.footer-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    flex-wrap:wrap;
-}
-
-.footer-logo img{
-    height:40px;
-    margin-bottom:18px;
-}
-
-.footer-links{
-    display:flex;
-    flex-wrap:wrap;
-    gap:24px;
-    margin-bottom:18px;
-}
-
-.footer-links a{
-    color:#94a3b8;
-    text-decoration:none;
-    font-size:14px;
-}
-
-.footer-links a:hover{
-    color:white;
-}
-
-.copy{
-    font-size:13px;
-    color:#64748b;
-}
-
-.social{
-    display:flex;
-    gap:16px;
-}
-
-.social div{
-    width:22px;
-    height:22px;
-    background:#334155;
-    border-radius:6px;
-}
 </style>
 </head>
 
@@ -155,11 +150,21 @@ body{
 
 <div class="main">
 
-    <!-- Большая анимированная картинка -->
+    <!-- БАННЕР -->
     <div class="top-banner">
         <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/wigoda.png">
     </div>
 
+    <!-- РУЛЕТКА -->
+    <div class="roulette-wrap">
+        <div class="roulette-container">
+            <div class="pointer">▼</div>
+            <div class="roulette-track" id="rouletteTrack"></div>
+        </div>
+        <button class="spin-btn" onclick="spin()">Крутить рулетку</button>
+    </div>
+
+    <!-- КОМАНДЫ -->
     <div class="grid" id="teams"></div>
 
 </div>
@@ -167,33 +172,7 @@ body{
 <!-- ФУТЕР -->
 <div class="footer">
     <div class="footer-inner">
-
-        <div class="footer-top">
-            <div>
-
-                <div class="footer-logo">
-                    <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/e64d006156d9ca2fe1b41f452532eab78cf232f3/cubostavki/cubostavki.png">
-                </div>
-
-                <div class="footer-links">
-                    <a href="#">Контакты</a>
-                    <a href="#">Пользовательское соглашение</a>
-                    <a href="#">Правила</a>
-                    <a href="#">Политика возврата средств</a>
-                </div>
-
-                <div class="copy">
-                    © 1488-2025 Cubostavki. Ne nastoyaщi sait cuboservera eto prosto shutka ya nikakoi otvetstvennosi ne nesu.
-                </div>
-            </div>
-
-            <div class="social">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-
+        © Cubostavki meme site
     </div>
 </div>
 
@@ -209,6 +188,37 @@ const teams = [
     {id:7,name:"Команда 8",img:"team8.jpg"}
 ];
 
+/* ===== РУЛЕТКА ===== */
+const track = document.getElementById("rouletteTrack");
+
+/* делаем длинную ленту */
+function buildRoulette(){
+    let html="";
+    for(let i=0;i<20;i++){
+        teams.forEach(t=>{
+            html+=`
+            <div class="roulette-item">
+                <img src="${t.img}">
+            </div>`;
+        });
+    }
+    track.innerHTML = html;
+}
+
+function spin(){
+    const itemWidth = 160;
+    const winnerIndex = Math.floor(Math.random()*teams.length);
+
+    const loops = 10;
+    const move = (loops * teams.length + winnerIndex) * itemWidth;
+
+    track.style.transition = "transform 4s cubic-bezier(.1,.7,.1,1)";
+    track.style.transform = `translateX(-${move}px)`;
+}
+
+buildRoulette();
+
+/* ===== ГОЛОСОВАНИЕ ===== */
 function getVotes(){
     return JSON.parse(localStorage.getItem("votes")||"{}");
 }
@@ -231,9 +241,8 @@ function render(){
             <img src="${t.img}">
             <h3>${t.name}</h3>
             <button class="vote-btn" onclick="vote(${t.id})">Голосовать</button>
-            <div class="votes">Голосов: ${votes[t.id]||0}</div>
-        </div>
-        `;
+            <div>Голосов: ${votes[t.id]||0}</div>
+        </div>`;
     });
 }
 
