@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Mem Bets</title>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    color:#cbd5e1;
+    font-family: Inter, Arial, sans-serif;
+}
+
+/* Контент */
+.main{
+    padding:40px 20px 60px 20px;
+    min-height:80vh;
+}
+
+/* ===== БАННЕР ===== */
+.top-banner{
+    display:flex;
+    justify-content:center;
+    margin-bottom:60px;
+}
+
+.top-banner img{
+    max-width:1000px;
+    width:95%;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse{
+    0%{ transform: scale(1); }
+    50%{ transform: scale(1.06); }
+    100%{ transform: scale(1); }
+}
+
+/* ===== РУЛЕТКА ===== */
+.roulette-wrap{
+    max-width:900px;
+    margin:0 auto 60px auto;
+    text-align:center;
+}
+
+.roulette-container{
+    position:relative;
+    overflow:hidden;
+    border:2px solid #1e293b;
+    border-radius:12px;
+    height:140px;
+    background:#020617;
+}
+
+.pointer{
+    position:absolute;
+    left:50%;
+    top:-18px;
+    transform:translateX(-50%);
+    font-size:32px;
+    z-index:5;
+}
+
+.roulette-track{
+    display:flex;
+    align-items:center;
+    height:100%;
+    transition: transform 4s cubic-bezier(.1,.7,.1,1);
+}
+
+.roulette-item{
+    min-width:160px;
+    padding:10px;
+}
+
+.roulette-item img{
+    width:100%;
+    height:100px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.spin-btn{
+    margin-top:15px;
+    padding:12px 28px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* ===== СЕТКА ===== */
+.grid{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap:20px;
+}
+
+.team{
+    background:#0f172a;
+    border:1px solid #1e293b;
+    border-radius:14px;
+    padding:14px;
+    text-align:center;
+}
+
+.team img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.vote-btn{
+    margin-top:10px;
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#1d4ed8;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* ===== ФУТЕР ===== */
+.footer{
+    width:100%;
+    background:linear-gradient(180deg,#020617,#020617ee);
+    border-top:1px solid #111827;
+    margin-top:60px;
+}
+
+.footer-inner{
+    max-width:1200px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+.footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+.footer-logo img{
+    height:40px;
+    margin-bottom:18px;
+}
+
+.footer-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-bottom:18px;
+}
+
+.footer-links a{
+    color:#94a3b8;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.footer-links a:hover{
+    color:white;
+}
+
+.copy{
+    font-size:13px;
+    color:#64748b;
+}
+
+.social{
+    display:flex;
+    gap:16px;
+}
+
+.social div{
+    width:22px;
+    height:22px;
+    background:#334155;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="main">
+
+    <!-- БАННЕР -->
+    <div class="top-banner">
+        <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/wigoda.png">
+    </div>
+
+    <!-- РУЛЕТКА -->
+    <div class="roulette-wrap">
+        <div class="roulette-container">
+            <div class="pointer">▼</div>
+            <div class="roulette-track" id="rouletteTrack"></div>
+        </div>
+        <button class="spin-btn" onclick="spin()">Крутить рулетку</button>
+    </div>
+
+    <!-- КОМАНДЫ -->
+    <div class="grid" id="teams"></div>
+
+</div>
+
+<div class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div>
+
+                <div class="footer-logo">
+                    <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/e64d006156d9ca2fe1b41f452532eab78cf232f3/cubostavki/cubostavki.png">
+                </div>
+
+                <div class="footer-links">
+                    <a href="#">Контакты</a>
+                    <a href="#">Пользовательское соглашение</a>
+                    <a href="#">Правила</a>
+                    <a href="#">Политика возврата средств</a>
+                </div>
+
+                <div class="copy">
+                    © 1488-2025 Cubostavki. Ne nastoyaщi sait cuboservera eto prosto shutka ya nikakoi otvetstvennosi ne nesu
+                </div>
+            </div>
+
+            <div class="social">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const teams = [
+    {id:0,name:"Красные",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/1q.webp"},
+    {id:1,name:"Оранжевые",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/2q.webp"},
+    {id:2,name:"Жёлтые",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/3q.webp"},
+    {id:3,name:"Зелёные",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/4q.webp"},
+    {id:4,name:"Аква",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/5q.webp"},
+    {id:5,name:"Синие",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/6q.webp"},
+    {id:6,name:"Фиолетовые",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/7q.webp"},
+    {id:7,name:"Розовые",img:"https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/8q.webp"}
+];
+
+const track = document.getElementById("rouletteTrack");
+
+function buildRoulette(){
+    let html="";
+    for(let i=0;i<20;i++){
+        teams.forEach(t=>{
+            html+=`<div class="roulette-item"><img src="${t.img}"></div>`;
+        });
+    }
+    track.innerHTML = html;
+}
+
+function spin(){
+    const itemWidth = 160;
+    const winnerIndex = Math.floor(Math.random()*teams.length);
+    const loops = 10;
+    const move = (loops * teams.length + winnerIndex) * itemWidth;
+    track.style.transform = `translateX(-${move}px)`;
+}
+
+buildRoulette();
+
+function getVotes(){
+    return JSON.parse(localStorage.getItem("votes")||"{}");
+}
+
+function vote(id){
+    let v=getVotes();
+    v[id]=(v[id]||0)+1;
+    localStorage.setItem("votes",JSON.stringify(v));
+    render();
+}
+
+function render(){
+    const container=document.getElementById("teams");
+    const votes=getVotes();
+    container.innerHTML="";
+
+    teams.forEach(t=>{
+        container.innerHTML+=`
+        <div class="team">
+            <img src="${t.img}">
+            <h3>${t.name}</h3>
+            <button class="vote-btn" onclick="vote(${t.id})">Голосовать</button>
+            <div>Голосов: ${votes[t.id]||0}</div>
+        </div>`;
+    });
+}
+
+render();
+</script>
+
+</body>
+</html>
