@@ -39,7 +39,7 @@ body{
 
 /* ===== РУЛЕТКА ===== */
 .roulette-wrap{
-    max-width:900px;
+    max-width:1200px;
     margin:0 auto 60px auto;
     text-align:center;
 }
@@ -49,16 +49,16 @@ body{
     overflow:hidden;
     border:2px solid #1e293b;
     border-radius:12px;
-    height:140px;
+    height:200px;  /* увеличили высоту */
     background:#020617;
 }
 
 .pointer{
     position:absolute;
     left:50%;
-    top:-18px;
+    top:-25px;       /* стрелка выше */
     transform:translateX(-50%);
-    font-size:32px;
+    font-size:40px;  /* стрелка больше */
     z-index:5;
 }
 
@@ -70,13 +70,13 @@ body{
 }
 
 .roulette-item{
-    min-width:160px;
+    min-width:220px;  /* увеличили ширину */
     padding:10px;
 }
 
 .roulette-item img{
     width:100%;
-    height:100px;
+    height:160px;   /* увеличили высоту картинки */
     object-fit:cover;
     border-radius:8px;
 }
@@ -268,7 +268,7 @@ function buildRoulette(){
 }
 
 function spin(){
-    const itemWidth = 160;
+    const itemWidth = 220; // увеличили ширину
     const winnerIndex = Math.floor(Math.random()*teams.length);
     const loops = 10;
     const move = (loops * teams.length + winnerIndex) * itemWidth;
