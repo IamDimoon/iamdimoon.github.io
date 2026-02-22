@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Cubostavki</title>
+<title>Mem Bets</title>
 
 <style>
 body{
@@ -256,11 +256,14 @@ const teams = [
 ];
 
 const track = document.getElementById("rouletteTrack");
+const itemWidth = 160; // ширина одного элемента
 let currentOffset = 0;
 
+// Построение бесконечного трека
 function buildRoulette(){
-    let html="";
-    for(let i=0;i<20;i++){
+    let html = "";
+    // Делаем трек 3 раза длиннее, чтобы можно было бесконечно крутить
+    for(let i=0;i<3;i++){
         teams.forEach(t=>{
             html+=`<div class="roulette-item"><img src="${t.img}"></div>`;
         });
@@ -268,26 +271,33 @@ function buildRoulette(){
     track.innerHTML = html;
 }
 
+// Функция вращения
 function spin(){
-    const itemWidth = 160;
     const winnerIndex = Math.floor(Math.random()*teams.length);
-    const loops = 20; // Сделаем больше вращений для эффекта
+    const loops = 15; // сколько раз повторить команды визуально
     const move = (loops * teams.length + winnerIndex) * itemWidth;
 
-    // Сбрасываем transition, чтобы каждый раз анимация была одинаковой
+    // Сброс transition перед анимацией
     track.style.transition = "none";
-    track.style.transform = `translateX(-${currentOffset}px)`;
+    track.style.transform = `translateX(-${currentOffset % (teams.length * itemWidth)}px)`;
 
-    // Даем браузеру время применить стиль без transition
     setTimeout(()=>{
         currentOffset += move;
         track.style.transition = "transform 4s cubic-bezier(.1,.7,.1,1)";
         track.style.transform = `translateX(-${currentOffset}px)`;
-    }, 50);
+    },50);
+
+    // После анимации сбросим позицию для бесконечного эффекта
+    setTimeout(()=>{
+        currentOffset = currentOffset % (teams.length * itemWidth);
+        track.style.transition = "none";
+        track.style.transform = `translateX(-${currentOffset}px)`;
+    }, 4200); // чуть больше чем длительность transition
 }
 
 buildRoulette();
 
+// Голосование
 function getVotes(){
     return JSON.parse(localStorage.getItem("votes")||"{}");
 }
