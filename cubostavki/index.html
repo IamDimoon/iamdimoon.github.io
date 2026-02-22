@@ -3,225 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Cubobet</title>
-
 <style>
-body{
-    margin:0;
-    background:#000;
-    color:#cbd5e1;
-    font-family: Inter, Arial, sans-serif;
-}
-
-.main{
-    padding:40px 20px 60px 20px;
-    min-height:80vh;
-}
-
-/* ===== БАННЕР ===== */
-.top-banner{
-    display:flex;
-    justify-content:center;
-    margin-bottom:60px;
-}
-
-.top-banner img{
-    max-width:1000px;
-    width:95%;
-    animation: pulse 3s ease-in-out infinite;
-}
-
-@keyframes pulse{
-    0%{ transform: scale(1); }
-    50%{ transform: scale(1.06); }
-    100%{ transform: scale(1); }
-}
-
-/* ===== РУЛЕТКА ===== */
-.roulette-wrap{
-    max-width:1200px;
-    margin:0 auto 60px auto;
-    text-align:center;
-}
-
-.roulette-container{
-    position:relative;
-    overflow:hidden;
-    border:2px solid #1e293b;
-    border-radius:12px;
-    height:200px;
-    background:#020617;
-}
-
-.pointer{
-    position:absolute;
-    left:50%;
-    top:-25px;
-    transform:translateX(-50%);
-    font-size:40px;
-    z-index:5;
-}
-
-.roulette-track{
-    display:flex;
-    align-items:center;
-    height:100%;
-    transition: transform 4s cubic-bezier(.1,.7,.1,1);
-}
-
-.roulette-item{
-    min-width:220px;
-    padding:10px;
-}
-
-.roulette-item img{
-    width:100%;
-    height:160px;
-    object-fit:cover;
-    border-radius:8px;
-}
-
-.spin-btn{
-    margin-top:15px;
-    padding:12px 28px;
-    border:none;
-    border-radius:8px;
-    background:#2563eb;
-    color:white;
-    font-weight:700;
-    cursor:pointer;
-}
-
-/* ===== КОМАНДЫ ===== */
-.grid{
-    max-width:1000px;
-    margin:auto;
-    display:flex;
-    flex-direction: column;
-    gap:15px;
-}
-
-.team-block{
-    display:flex;
-    align-items:center;
-    background:#0f172a; /* тёмно-синий */
-    border-radius:12px;
-    padding:10px 20px;
-    min-height:100px;
-}
-
-.team-icon{
-    flex: 0 0 120px;
-}
-
-.team-icon img{
-    width:100%;
-    border-radius:10px;
-}
-
-.team-info{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    margin-left:20px;
-}
-
-.team-info h3{
-    margin:0 0 6px 0;
-}
-
-.player-names{
-    font-size:14px;
-    color:#cbd5e1;
-    margin-bottom:6px;
-}
-
-.vote-btn{
-    padding:6px 16px;
-    border:none;
-    border-radius:8px;
-    background:#1d4ed8;
-    color:white;
-    font-weight:600;
-    cursor:pointer;
-    width:120px;
-    align-self:flex-start;
-}
-
-/* Счётчик голосов */
-.team-votes{
-    flex: 0 0 60px;
-    text-align:center;
-    font-weight:700;
-    font-size:18px;
-    color:#fff;
-}
-
-/* ===== ФУТЕР ===== */
-.footer{
-    width:100%;
-    background:linear-gradient(180deg,#020617,#020617ee);
-    border-top:1px solid #111827;
-    margin-top:60px;
-}
-
-.footer-inner{
-    max-width:1200px;
-    margin:auto;
-    padding:30px 20px;
-}
-
-.footer-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    flex-wrap:wrap;
-}
-
-.footer-logo img{
-    height:40px;
-    margin-bottom:18px;
-}
-
-.footer-links{
-    display:flex;
-    flex-wrap:wrap;
-    gap:24px;
-    margin-bottom:18px;
-}
-
-.footer-links a{
-    color:#94a3b8;
-    text-decoration:none;
-    font-size:14px;
-}
-
-.footer-links a:hover{
-    color:white;
-}
-
-.copy{
-    font-size:13px;
-    color:#64748b;
-}
-
-.social{
-    display:flex;
-    gap:16px;
-}
-
-.social div{
-    width:22px;
-    height:22px;
-    background:#334155;
-    border-radius:6px;
-}
+body{margin:0;background:#000;color:#cbd5e1;font-family: Inter, Arial, sans-serif;}
+.main{padding:40px 20px 60px 20px;min-height:80vh;}
+.top-banner{display:flex;justify-content:center;margin-bottom:60px;}
+.top-banner img{max-width:1000px;width:95%;animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%{transform: scale(1);}50%{transform: scale(1.06);}100%{transform: scale(1);}}
+.roulette-wrap{max-width:1200px;margin:0 auto 60px auto;text-align:center;}
+.roulette-container{position:relative;overflow:hidden;border:2px solid #1e293b;border-radius:12px;height:200px;background:#020617;}
+.pointer{position:absolute;left:50%;top:-25px;transform:translateX(-50%);font-size:40px;z-index:5;}
+.roulette-track{display:flex;align-items:center;height:100%;transition: transform 4s cubic-bezier(.1,.7,.1,1);}
+.roulette-item{min-width:220px;padding:10px;}
+.roulette-item img{width:100%;height:160px;object-fit:cover;border-radius:8px;}
+.spin-btn{margin-top:15px;padding:12px 28px;border:none;border-radius:8px;background:#2563eb;color:white;font-weight:700;cursor:pointer;}
+.grid{max-width:1000px;margin:auto;display:flex;flex-direction: column;gap:15px;}
+.team-block{display:flex;align-items:center;background:#0f172a;border-radius:12px;padding:10px 20px;min-height:100px;}
+.team-icon{flex: 0 0 120px;}
+.team-icon img{width:100%;border-radius:10px;}
+.team-info{flex:1;display:flex;flex-direction:column;justify-content:center;margin-left:20px;}
+.team-info h3{margin:0 0 6px 0;}
+.player-names{font-size:14px;color:#cbd5e1;margin-bottom:6px;}
+.vote-btn{padding:6px 16px;border:none;border-radius:8px;background:#1d4ed8;color:white;font-weight:600;cursor:pointer;width:120px;align-self:flex-start;}
+.vote-btn:disabled{background:#555;cursor:not-allowed;}
+.team-votes{flex: 0 0 60px;text-align:center;font-weight:700;font-size:18px;color:#fff;}
+.footer{width:100%;background:linear-gradient(180deg,#020617,#020617ee);border-top:1px solid #111827;margin-top:60px;}
+.footer-inner{max-width:1200px;margin:auto;padding:30px 20px;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;}
+.footer-logo img{height:40px;margin-bottom:18px;}
+.footer-links{display:flex;flex-wrap:wrap;gap:24px;margin-bottom:18px;}
+.footer-links a{color:#94a3b8;text-decoration:none;font-size:14px;}
+.footer-links a:hover{color:white;}
+.copy{font-size:13px;color:#64748b;}
+.social{display:flex;gap:16px;}
+.social div{width:22px;height:22px;background:#334155;border-radius:6px;}
 </style>
 </head>
 <body>
 
 <div class="main">
-
     <!-- БАННЕР -->
     <div class="top-banner">
         <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/wigoda.png">
@@ -238,7 +57,6 @@ body{
 
     <!-- КОМАНДЫ -->
     <div class="grid" id="teams"></div>
-
 </div>
 
 <!-- ФУТЕР -->
@@ -260,9 +78,7 @@ body{
                 </div>
             </div>
             <div class="social">
-                <div></div>
-                <div></div>
-                <div></div>
+                <div></div><div></div><div></div>
             </div>
         </div>
     </div>
@@ -302,26 +118,28 @@ function spin(){
 
 buildRoulette();
 
-function getVotes(){
-    return JSON.parse(localStorage.getItem("votes")||"{}");
-}
+function getVotes(){return JSON.parse(localStorage.getItem("votes")||"{}");}
+function getUserVotes(){return JSON.parse(localStorage.getItem("userVotes")||"{}");}
 
 function vote(id){
-    let v=getVotes();
-    v[id]=(v[id]||0)+1;
-    localStorage.setItem("votes",JSON.stringify(v));
+    const userVotes = getUserVotes();
+    if(userVotes[id]) return; // уже голосовал
+    let votes=getVotes();
+    votes[id]=(votes[id]||0)+1;
+    localStorage.setItem("votes",JSON.stringify(votes));
+    userVotes[id]=true;
+    localStorage.setItem("userVotes",JSON.stringify(userVotes));
     render();
 }
 
 function render(){
     const container=document.getElementById("teams");
     const votes=getVotes();
+    const userVotes=getUserVotes();
     container.innerHTML="";
-
-    // сортировка по голосам
     const sortedTeams = [...teams].sort((a,b)=> (votes[b.id]||0) - (votes[a.id]||0));
-
     sortedTeams.forEach(t=>{
+        const disabled = userVotes[t.id] ? 'disabled' : '';
         container.innerHTML+=`
         <div class="team-block">
             <div class="team-icon">
@@ -330,7 +148,7 @@ function render(){
             <div class="team-info">
                 <h3>${t.name}</h3>
                 <div class="player-names">${t.players.join(' ')}</div>
-                <button class="vote-btn" onclick="vote(${t.id})">Голосовать</button>
+                <button class="vote-btn" onclick="vote(${t.id})" ${disabled}>Голосовать</button>
             </div>
             <div class="team-votes">${votes[t.id]||0}</div>
         </div>`;
