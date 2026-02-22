@@ -12,29 +12,9 @@ body{
     font-family: Inter, Arial, sans-serif;
 }
 
-/* Контент */
 .main{
     padding:40px 20px 60px 20px;
     min-height:80vh;
-}
-
-/* ===== БАННЕР ===== */
-.top-banner{
-    display:flex;
-    justify-content:center;
-    margin-bottom:60px;
-}
-
-.top-banner img{
-    max-width:1000px;
-    width:95%;
-    animation: pulse 3s ease-in-out infinite;
-}
-
-@keyframes pulse{
-    0%{ transform: scale(1); }
-    50%{ transform: scale(1.06); }
-    100%{ transform: scale(1); }
 }
 
 /* ===== РУЛЕТКА ===== */
@@ -49,16 +29,16 @@ body{
     overflow:hidden;
     border:2px solid #1e293b;
     border-radius:12px;
-    height:200px;  /* увеличили высоту */
+    height:200px;
     background:#020617;
 }
 
 .pointer{
     position:absolute;
     left:50%;
-    top:-25px;       /* стрелка выше */
+    top:-25px;
     transform:translateX(-50%);
-    font-size:40px;  /* стрелка больше */
+    font-size:40px;
     z-index:5;
 }
 
@@ -70,13 +50,13 @@ body{
 }
 
 .roulette-item{
-    min-width:220px;  /* увеличили ширину */
+    min-width:220px;
     padding:10px;
 }
 
 .roulette-item img{
     width:100%;
-    height:160px;   /* увеличили высоту картинки */
+    height:160px;
     object-fit:cover;
     border-radius:8px;
 }
@@ -92,112 +72,74 @@ body{
     cursor:pointer;
 }
 
-/* ===== СЕТКА ===== */
+/* ===== КОМАНДЫ ===== */
 .grid{
-    max-width:1100px;
+    max-width:1000px;
     margin:auto;
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    display:flex;
+    flex-direction: column;
     gap:20px;
 }
 
-.team{
-    background:#0f172a;
-    border:1px solid #1e293b;
-    border-radius:14px;
-    padding:14px;
-    text-align:center;
+.team-block{
+    display:flex;
+    align-items:center;
+    background:#0f172a; /* тёмно-синий */
+    border-radius:12px;
+    padding:10px 20px;
+    transition: all 0.3s ease;
+    min-height:80px;
 }
 
-.team img{
+.team-block:hover{
+    background:#1c2a47;
+}
+
+.team-icon{
+    flex: 0 0 120px;
+}
+
+.team-icon img{
     width:100%;
-    height:160px;
-    object-fit:cover;
     border-radius:10px;
 }
 
+.team-info{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    margin-left:20px;
+}
+
+.team-info h3{
+    margin:0 0 8px 0;
+}
+
 .vote-btn{
-    margin-top:10px;
-    width:100%;
-    padding:10px;
+    padding:6px 16px;
     border:none;
     border-radius:8px;
     background:#1d4ed8;
     color:white;
     font-weight:600;
     cursor:pointer;
+    width:120px;
 }
 
-/* ===== ФУТЕР ===== */
-.footer{
-    width:100%;
-    background:linear-gradient(180deg,#020617,#020617ee);
-    border-top:1px solid #111827;
-    margin-top:60px;
-}
-
-.footer-inner{
-    max-width:1200px;
-    margin:auto;
-    padding:30px 20px;
-}
-
-.footer-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    flex-wrap:wrap;
-}
-
-.footer-logo img{
-    height:40px;
-    margin-bottom:18px;
-}
-
-.footer-links{
-    display:flex;
-    flex-wrap:wrap;
-    gap:24px;
-    margin-bottom:18px;
-}
-
-.footer-links a{
-    color:#94a3b8;
-    text-decoration:none;
-    font-size:14px;
-}
-
-.footer-links a:hover{
-    color:white;
-}
-
-.copy{
-    font-size:13px;
-    color:#64748b;
-}
-
-.social{
-    display:flex;
-    gap:16px;
-}
-
-.social div{
-    width:22px;
-    height:22px;
-    background:#334155;
-    border-radius:6px;
+/* Счётчик голосов */
+.team-votes{
+    flex: 0 0 60px;
+    text-align:center;
+    font-weight:700;
+    font-size:18px;
+    color:#fff;
 }
 </style>
 </head>
-
 <body>
 
 <div class="main">
-
-    <!-- БАННЕР -->
-    <div class="top-banner">
-        <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/main/cubostavki/wigoda.png">
-    </div>
 
     <!-- РУЛЕТКА -->
     <div class="roulette-wrap">
@@ -211,36 +153,6 @@ body{
     <!-- КОМАНДЫ -->
     <div class="grid" id="teams"></div>
 
-</div>
-
-<div class="footer">
-    <div class="footer-inner">
-        <div class="footer-top">
-            <div>
-
-                <div class="footer-logo">
-                    <img src="https://raw.githubusercontent.com/IamDimoon/iamdimoon.github.io/e64d006156d9ca2fe1b41f452532eab78cf232f3/cubostavki/cubostavki.png">
-                </div>
-
-                <div class="footer-links">
-                    <a href="#">Контакты</a>
-                    <a href="#">Пользовательское соглашение</a>
-                    <a href="#">Правила</a>
-                    <a href="#">Политика возврата средств</a>
-                </div>
-
-                <div class="copy">
-                    © 1488-2025 Cubostavki. Ne nastoyaщi sait cuboservera eto prosto shutka ya nikakoi otvetstvennosi ne nesu
-                </div>
-            </div>
-
-            <div class="social">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>
@@ -268,7 +180,7 @@ function buildRoulette(){
 }
 
 function spin(){
-    const itemWidth = 220; // увеличили ширину
+    const itemWidth = 220; 
     const winnerIndex = Math.floor(Math.random()*teams.length);
     const loops = 10;
     const move = (loops * teams.length + winnerIndex) * itemWidth;
@@ -293,13 +205,21 @@ function render(){
     const votes=getVotes();
     container.innerHTML="";
 
-    teams.forEach(t=>{
+    // сортировка по голосам
+    const sortedTeams = [...teams].sort((a,b)=> (votes[b.id]||0) - (votes[a.id]||0));
+
+    sortedTeams.forEach(t=>{
+        const blockHeight = 80 + (votes[t.id]||0)*5; // увеличение высоты в зависимости от голосов
         container.innerHTML+=`
-        <div class="team">
-            <img src="${t.img}">
-            <h3>${t.name}</h3>
-            <button class="vote-btn" onclick="vote(${t.id})">Голосовать</button>
-            <div>Голосов: ${votes[t.id]||0}</div>
+        <div class="team-block" style="height:${blockHeight}px">
+            <div class="team-icon">
+                <img src="${t.img}">
+            </div>
+            <div class="team-info">
+                <h3>${t.name}</h3>
+                <button class="vote-btn" onclick="vote(${t.id})">Голосовать</button>
+            </div>
+            <div class="team-votes">${votes[t.id]||0}</div>
         </div>`;
     });
 }
