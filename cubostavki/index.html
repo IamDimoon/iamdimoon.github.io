@@ -2,119 +2,221 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Мем Ставки</title>
+<title>Mem Bets</title>
 
 <style>
+/* ===== БАЗА ===== */
 body{
-    background:#0f172a;
-    color:white;
-    font-family:Arial, sans-serif;
     margin:0;
-    padding:20px;
+    background:#000;
+    color:#cbd5e1;
+    font-family: Inter, Arial, sans-serif;
 }
 
-h1{
-    text-align:center;
+/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+.main{
+    min-height:100vh;
+    padding:40px 20px 160px 20px;
 }
 
+/* ===== СЕТКА КОМАНД ===== */
 .grid{
+    max-width:1100px;
+    margin:auto;
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
     gap:20px;
-    max-width:1000px;
-    margin:40px auto;
 }
 
 .team{
-    background:#1e293b;
-    padding:15px;
-    border-radius:15px;
+    background:#0f172a;
+    border:1px solid #1e293b;
+    border-radius:14px;
+    padding:14px;
     text-align:center;
+    transition:0.2s;
+}
+
+.team:hover{
+    border-color:#334155;
 }
 
 .team img{
     width:100%;
-    height:150px;
+    height:160px;
     object-fit:cover;
     border-radius:10px;
 }
 
-button{
+.vote-btn{
     margin-top:10px;
-    padding:10px;
     width:100%;
+    padding:10px;
     border:none;
     border-radius:8px;
-    background:#22c55e;
+    background:#1d4ed8;
     color:white;
-    font-size:16px;
+    font-weight:600;
     cursor:pointer;
 }
 
-button:hover{
-    background:#16a34a;
+.vote-btn:hover{
+    background:#2563eb;
 }
 
 .votes{
-    margin-top:8px;
+    margin-top:6px;
     font-size:14px;
-    opacity:0.8;
+    opacity:0.7;
+}
+
+/* ===== ФУТЕР КАК НА СКРИНЕ ===== */
+.footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:linear-gradient(180deg,#020617,#020617ee);
+    border-top:1px solid #111827;
+}
+
+.footer-inner{
+    max-width:1200px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+/* Лого */
+.logo{
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:white;
+    margin-bottom:18px;
+}
+
+/* Ссылки */
+.footer-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-bottom:18px;
+}
+
+.footer-links a{
+    color:#94a3b8;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.footer-links a:hover{
+    color:white;
+}
+
+/* Копирайт */
+.copy{
+    font-size:13px;
+    color:#64748b;
+}
+
+/* Иконки справа */
+.footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+.social{
+    display:flex;
+    gap:16px;
+}
+
+.social div{
+    width:22px;
+    height:22px;
+    background:#334155;
+    border-radius:6px;
 }
 </style>
-
 </head>
 
 <body>
 
-<h1>🔥 Мем Ставки</h1>
+<div class="main">
 
-<div class="grid" id="teams"></div>
+    <div class="grid" id="teams"></div>
+
+</div>
+
+<!-- ===== ФУТЕР ===== -->
+<div class="footer">
+    <div class="footer-inner">
+
+        <div class="footer-top">
+            <div>
+                <div class="logo">CUBOSERVER</div>
+
+                <div class="footer-links">
+                    <a href="#">Контакты</a>
+                    <a href="#">Пользовательское соглашение</a>
+                    <a href="#">Правила</a>
+                    <a href="#">Политика возврата средств</a>
+                </div>
+
+                <div class="copy">
+                    © 2021-2025 Cuboserver. Not an official Minecraft product.
+                </div>
+            </div>
+
+            <div class="social">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <script>
 const teams = [
-    {id:0, name:"Команда 1", img:"team1.jpg"},
-    {id:1, name:"Команда 2", img:"team2.jpg"},
-    {id:2, name:"Команда 3", img:"team3.jpg"},
-    {id:3, name:"Команда 4", img:"team4.jpg"},
-    {id:4, name:"Команда 5", img:"team5.jpg"},
-    {id:5, name:"Команда 6", img:"team6.jpg"},
-    {id:6, name:"Команда 7", img:"team7.jpg"},
-    {id:7, name:"Команда 8", img:"team8.jpg"}
+    {id:0,name:"Команда 1",img:"team1.jpg"},
+    {id:1,name:"Команда 2",img:"team2.jpg"},
+    {id:2,name:"Команда 3",img:"team3.jpg"},
+    {id:3,name:"Команда 4",img:"team4.jpg"},
+    {id:4,name:"Команда 5",img:"team5.jpg"},
+    {id:5,name:"Команда 6",img:"team6.jpg"},
+    {id:6,name:"Команда 7",img:"team7.jpg"},
+    {id:7,name:"Команда 8",img:"team8.jpg"}
 ];
 
-const container = document.getElementById("teams");
-
 function getVotes(){
-    return JSON.parse(localStorage.getItem("votes") || "{}");
-}
-
-function saveVotes(v){
-    localStorage.setItem("votes", JSON.stringify(v));
+    return JSON.parse(localStorage.getItem("votes")||"{}");
 }
 
 function vote(id){
-    let votes = getVotes();
-    votes[id] = (votes[id] || 0) + 1;
-    saveVotes(votes);
+    let v=getVotes();
+    v[id]=(v[id]||0)+1;
+    localStorage.setItem("votes",JSON.stringify(v));
     render();
 }
 
 function render(){
-    const votes = getVotes();
-    container.innerHTML = "";
+    const container=document.getElementById("teams");
+    const votes=getVotes();
+
+    container.innerHTML="";
 
     teams.forEach(t=>{
-        const div = document.createElement("div");
-        div.className = "team";
-
-        div.innerHTML = `
+        container.innerHTML+=`
+        <div class="team">
             <img src="${t.img}">
             <h3>${t.name}</h3>
-            <button onclick="vote(${t.id})">Голосовать</button>
-            <div class="votes">Голосов: ${votes[t.id] || 0}</div>
+            <button class="vote-btn" onclick="vote(${t.id})">Голосовать</button>
+            <div class="votes">Голосов: ${votes[t.id]||0}</div>
+        </div>
         `;
-
-        container.appendChild(div);
     });
 }
 
